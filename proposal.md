@@ -19,4 +19,4 @@ We will build a trading web application where users can list, sell and buy Pokem
 13. As a seller, I can list cards from my profile for sale. (1) --
 14. As a seller, I can see the list of offers from other users and select the one that I liked the most. (2) --
 
-We will model our solution using Facebook's UI and EBay's functionality. We estimate that we will spend a total of 160 hours building this product, i.e. 80 hours per team member.
+We will model our solution using Facebook's UI and EBay's functionality. We estimate that we will spend a total of 160 hours building this product, i.e. 54 hours per team member.
