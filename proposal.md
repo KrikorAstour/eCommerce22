@@ -3,7 +3,7 @@
 We will build a trading web application where users can list, sell and buy Pokemon Cards.
 
 ## Our project supports the following features
-
+1. As a prospective user I can sign up/register.
 1. As a user, I can login and logout into my account.
 2. As a user, I can like posts from another user. (1)
 3. As a user, I can search for cards by their names. (1)
