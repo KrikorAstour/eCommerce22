@@ -5,7 +5,7 @@ We will build a trading web application where users can list, sell and buy Pokem
 ## Our project supports the following features
 1. As a prospective user I can sign up/register.
 1. As a user, I can login and logout into my account.
-2. As a user, I can like posts from another user. (1)
+2. As a user, I can comment posts from another user. (1)
 3. As a user, I can search for cards by their names. (1)
 4. As a user, I can add/delete/modify cards in my profile. (3)
 5. As a user, I can set the rarity of the cards that I posted from common to legendary. (1) --?
