@@ -1,7 +1,7 @@
 Feature: user account balance
 In order to buy Pokemon cards
 As a Buyer
-I want to be able to have a balance
+I want to be able to manage a balance
 
 Scenario: try checking user account balance
 Given I am logged in with a user account
