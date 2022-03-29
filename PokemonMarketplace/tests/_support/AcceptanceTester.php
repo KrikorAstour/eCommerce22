@@ -20,15 +20,20 @@ class AcceptanceTester extends \Codeception\Actor
 {
     use _generated\AcceptanceTesterActions;
 
+
     /**
      * @Given I am logged in
      */
     public function iAmLoggedIn()
     {
+        // if ($this->loadSessionSnapshot('login')) return;
+
         $this->amOnPage('/login');
-        $this->fillField('email', 'reimarrosas@email');
+        $this->fillField('email', 'reimarrosas@example.com');
         $this->fillField('password', 'reimarrosas');
         $this->click('Login');
+
+        $this->saveSessionSnapshot('login');
     }
 
     /**
@@ -36,6 +41,7 @@ class AcceptanceTester extends \Codeception\Actor
      */
     public function iAmOn($page)
     {
+        $this->loadSessionSnapshot('login');
         $this->amOnPage($page);
     }
 
@@ -108,6 +114,7 @@ class AcceptanceTester extends \Codeception\Actor
      */
     public function iAmNotLoggedIn()
     {
+        $this->deleteSessionSnapshot('login');
     }
 
     /**

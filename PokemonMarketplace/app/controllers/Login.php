@@ -10,8 +10,9 @@ class Login extends Controller
     public function index()
     {
         if (!empty($_SESSION)) {
-            echo '<meta http-equiv="refresh" content="0;url=' . URLROOT . '" />';
+            header('Location: ' . URLROOT);
         } else if (!isset($_POST['Login'])) {
+            $this->debug_print($_SESSION);
             $this->view('Login/login');
         } else {
             $result = $this->validate_creds($_POST['email'], $_POST['password']);
@@ -26,7 +27,7 @@ class Login extends Controller
                     if (password_verify($result['password'], $user->password)) {
                         $_SESSION['user_id'] = $user->id;
                         $_SESSION['username'] = $user->username;
-                        echo '<meta http-equiv="refresh" content="0;url=' . URLROOT . '" />';
+                        header('Location: ' . URLROOT);
                     } else {
                         $this->view('Login/login', ['error' => ['Password Invalid!']]);
                     }
@@ -38,7 +39,7 @@ class Login extends Controller
     public function signup()
     {
         if (!empty($_SESSION)) {
-            echo '<meta http-equiv="refresh" content="0;url=' . URLROOT . '" />';
+            header('Location: ' . URLROOT);
         } else if (!isset($_POST['Signup'])) {
             $this->view('Login/signup');
         } else {
@@ -55,7 +56,7 @@ class Login extends Controller
                     $is_succ = $this->user_model->create_user($result['email'], $hashed_pass);
 
                     if ($is_succ) {
-                        echo '<meta http-equiv="refresh" content="0;url=' . URLROOT . '/login" />';
+                        header('Location: ' . URLROOT . '/login');
                     } else {
                         $this->view('Login/signup', ['error' => ['Something Broke!']]);
                     }
@@ -67,7 +68,7 @@ class Login extends Controller
     public function logout()
     {
         session_destroy();
-        echo '<meta http-equiv="refresh" content="0;url=' . URLROOT . '/login" />';
+        header('Location: ' . URLROOT . '/login');
     }
 
     private function validate_email($email)

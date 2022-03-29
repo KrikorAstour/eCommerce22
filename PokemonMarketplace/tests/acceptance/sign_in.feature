@@ -9,7 +9,8 @@ Feature: sign_in
     Then I should see "PokeMarket"
 
   Scenario Outline: try signing in while not logged in
-    Given I am on "/login"
+    Given I am not logged in
+    And I am on "/login"
     When I enter <email> in email input
     And I enter <password> in password input
     And I click on "Login"

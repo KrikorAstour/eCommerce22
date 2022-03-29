@@ -7,8 +7,16 @@
 actor: AcceptanceTester
 modules:
     enabled:
-        - PhpBrowser:
+        - WebDriver:
             url: http://localhost/eCommerce22/PokemonMarketplace
+            browser: firefox
+            path: ''
+            capabilities:
+                acceptInsecureCerts: true
+                moz:firefoxOptions:
+                    args: ["-headless"]
+                    prefs:
+                        intl.accept_languages: "de-AT"
         - \Helper\Acceptance
         - Db:
             dsn: 'mysql:host=localhost;dbname=pokemarket'

@@ -5,6 +5,5 @@ Feature: log_out
 
   Scenario: try logging out
     Given I am logged in
-    And I am on "/home"
-    When I clicked on log out link
+    When I am on "/login/logout"
     Then I should see "Login"
