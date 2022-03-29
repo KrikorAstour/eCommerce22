@@ -20,4 +20,11 @@ class Controller
         require_once '../app/models/' . $modelName . '.php';
         return new $modelName;
     }
+
+    public function debug_print($var)
+    {
+        echo '<pre>';
+        print_r($var);
+        echo '</pre>';
+    }
 }
