@@ -64,6 +64,15 @@
             'reference' => '59374f2fef0cabb9e8ddb53277e85cdca74328de',
             'dev_requirement' => true,
         ),
+        'codeception/module-db' => array(
+            'pretty_version' => '2.0.2',
+            'version' => '2.0.2.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../codeception/module-db',
+            'aliases' => array(),
+            'reference' => '024505fff8faf6825478003151ad97c0fe46a942',
+            'dev_requirement' => true,
+        ),
         'codeception/module-phpbrowser' => array(
             'pretty_version' => '1.0.2',
             'version' => '1.0.2.0',

@@ -2,7 +2,7 @@
 // App Root
 define('APPROOT', dirname(dirname(__FILE__)));
 // URL Root
-define('URLROOT', 'localhost/eCommerce22/PokemonMarketplace');
+define('URLROOT', 'http://localhost/eCommerce22/PokemonMarketplace');
 // Site Name
 define('SITENAME', 'Pokemon Marketplace');
 
@@ -10,4 +10,4 @@ define('SITENAME', 'Pokemon Marketplace');
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_PASS', '');
-define('DB_NAME', 'YOUR_DB_NAME');
+define('DB_NAME', 'pokemarket');

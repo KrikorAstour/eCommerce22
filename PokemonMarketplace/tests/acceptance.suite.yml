@@ -10,4 +10,16 @@ modules:
         - PhpBrowser:
             url: http://localhost/eCommerce22/PokemonMarketplace
         - \Helper\Acceptance
+        - Db:
+            dsn: 'mysql:host=localhost;dbname=pokemarket'
+            user: 'root'
+            password: ''
+            dump: 'tests/_data/input.sql'
+            populate: true
+            cleanup: true
+            initial_queries:
+                - 'CREATE DATABASE IF NOT EXISTS pokemarket;'
+                - 'USE pokemarket;'
+                - 'SET NAMES utf8;'
+
 step_decorators: ~        

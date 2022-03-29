@@ -6,12 +6,13 @@ Feature: profile_visibility
   Scenario: try seeing post operations on my profile
     Given I am logged in
     When I go to my profile
-    Then I should see 'Edit'
-    And I should see 'Delete'
+    Then I should see "Edit"
+    And I should see "Delete"
+    But I should not see "View More"
 
   Scenario: try not seeing post operations on another user's profile
-    Given I am on logged in
+    Given I am logged in
     When I go to another profile
-    Then I should see 'View More'
-    But I should not see 'Edit'
-    And I should not see 'Delete'
+    Then I should see "View More"
+    But I should not see "Edit"
+    And I should not see "Delete"

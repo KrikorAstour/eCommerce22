@@ -5,6 +5,6 @@ Feature: log_out
 
   Scenario: try logging out
     Given I am logged in
-    And I am on localhost/eCommerce22/PokemonMarketplace/home
+    And I am on "/home"
     When I clicked on log out link
-    Then I should see 'Login'
+    Then I should see "Login"
