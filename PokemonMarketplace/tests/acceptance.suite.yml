@@ -17,6 +17,7 @@ modules:
             dump: 'tests/_data/input.sql'
             populate: true
             cleanup: true
+            populator: 'C:\xampp\mysql\bin\mysql -u root -h localhost pokemarket < tests/_data/input.sql'
             initial_queries:
                 - 'CREATE DATABASE IF NOT EXISTS pokemarket;'
                 - 'USE pokemarket;'

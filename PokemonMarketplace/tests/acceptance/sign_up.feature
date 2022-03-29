@@ -13,6 +13,7 @@ Feature: sign_up
     When I enter <email> in email input
     And I enter <password> in password input
     And I enter <verify_password> in verify_password input
+    And I click on "Sign Up"
     Then I should see <result>
 
     Examples:

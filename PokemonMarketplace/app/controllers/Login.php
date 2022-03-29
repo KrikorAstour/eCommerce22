@@ -19,7 +19,6 @@ class Login extends Controller
             if (!empty($result['error'])) {
                 $this->view('Login/login', ['error' => $result['error']]);
             } else {
-                $this->debug_print($this->user_model->show_users());
                 $user = $this->user_model->get_user($result['email']);
                 if (empty($user)) {
                     $this->view('Login/login', ['error' => ['Email Invalid!']]);
@@ -30,6 +29,35 @@ class Login extends Controller
                         echo '<meta http-equiv="refresh" content="0;url=' . URLROOT . '" />';
                     } else {
                         $this->view('Login/login', ['error' => ['Password Invalid!']]);
+                    }
+                }
+            }
+        }
+    }
+
+    public function signup()
+    {
+        if (!empty($_SESSION)) {
+            echo '<meta http-equiv="refresh" content="0;url=' . URLROOT . '" />';
+        } else if (!isset($_POST['Signup'])) {
+            $this->view('Login/signup');
+        } else {
+            $result = $this->validate_creds($_POST['email'], $_POST['password'], $_POST['verify_password']);
+
+            if (!empty($result['error'])) {
+                $this->view('Login/signup', ['error' => $result['error']]);
+            } else {
+                $user = $this->user_model->get_user($result['email']);
+                if (!empty($user)) {
+                    $this->view('Login/signup', ['error' => ['Email Invalid!']]);
+                } else {
+                    $hashed_pass = password_hash($result['password'], PASSWORD_DEFAULT);
+                    $is_succ = $this->user_model->create_user($result['email'], $hashed_pass);
+
+                    if ($is_succ) {
+                        echo '<meta http-equiv="refresh" content="0;url=' . URLROOT . '/login" />';
+                    } else {
+                        $this->view('Login/signup', ['error' => ['Something Broke!']]);
                     }
                 }
             }
@@ -58,7 +86,7 @@ class Login extends Controller
     private function validate_password($password)
     {
         if (isset($password)) {
-            return $password >= 8 ? $password : false;
+            return strlen($password) >= 8 ? $password : false;
         }
 
         return false;
