@@ -18,8 +18,8 @@ Feature: sign_up
     Then I should see <result>
 
     Examples:
-      | email                     | password      | verify_password | result                    |
-      | "reimarrosas"             | "reimarrosas" | "reimarrosas"   | "Email Invalid"           |
+      | email                    | password      | verify_password | result                    |
+      | "reimarrosas"            | "reimarrosas" | "reimarrosas"   | "Email Invalid"           |
       | "pokemarket@example.com" | "reim"        | "reim"          | "Password Invalid"        |
       | "pokemarket@example.com" | "reimarrosas" | "reim"          | "Verify Password Invalid" |
-      | "pokemarket@example.com" | "reimarrosas" | "reimarrosas"   | "Login"                   |
+      | "pokemarket@example.com" | "reimarrosas" | "reimarrosas"   | "QR Code"                 |

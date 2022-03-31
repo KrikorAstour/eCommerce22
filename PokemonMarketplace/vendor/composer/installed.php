@@ -514,6 +514,15 @@
             'reference' => 'c6c1022351a901512170118436c764e473f6de8c',
             'dev_requirement' => true,
         ),
+        'sonata-project/google-authenticator' => array(
+            'pretty_version' => '2.3.1',
+            'version' => '2.3.1.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../sonata-project/google-authenticator',
+            'aliases' => array(),
+            'reference' => '71a4189228f93a9662574dc8c65e77ef55061b59',
+            'dev_requirement' => false,
+        ),
         'symfony/browser-kit' => array(
             'pretty_version' => 'v5.4.3',
             'version' => '5.4.3.0',

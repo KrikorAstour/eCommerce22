@@ -1,5 +1,9 @@
 <?php
 
+require_once __DIR__ . '../../../vendor/sonata-project/google-authenticator/src/GoogleAuthenticator.php';
+require_once __DIR__ . '../../../vendor/sonata-project/google-authenticator/src/FixedBitNotation.php';
+require_once __DIR__ . '../../../vendor/sonata-project/google-authenticator/src/GoogleAuthenticatorInterface.php';
+require_once __DIR__ . '../../../vendor/sonata-project/google-authenticator/src/GoogleQrUrl.php';
 
 /**
  * Inherited Methods
@@ -28,12 +32,16 @@ class AcceptanceTester extends \Codeception\Actor
     {
         // if ($this->loadSessionSnapshot('login')) return;
 
+        $ga = new \Sonata\GoogleAuthenticator\GoogleAuthenticator();
+        $token = $ga->getCode('XGH3DJLAAFRC77E5');
+
         $this->amOnPage('/login');
         $this->fillField('email', 'reimarrosas@example.com');
         $this->fillField('password', 'reimarrosas');
+        $this->fillField('two_fa', $token);
         $this->click('Login');
 
-        $this->saveSessionSnapshot('login');
+        // $this->saveSessionSnapshot('login');
     }
 
     /**
@@ -41,7 +49,7 @@ class AcceptanceTester extends \Codeception\Actor
      */
     public function iAmOn($page)
     {
-        $this->loadSessionSnapshot('login');
+        // $this->loadSessionSnapshot('login');
         $this->amOnPage($page);
     }
 
@@ -139,5 +147,23 @@ class AcceptanceTester extends \Codeception\Actor
     public function iClickOn($button)
     {
         $this->click($button);
+    }
+
+    /**
+     * @When I enter :token in two_fa input
+     */
+    public function iEnterInTwo_faInput($token)
+    {
+        $this->fillField('two_fa', $token);
+    }
+
+    /**
+     * @When I enter token in two_fa input
+     */
+    public function iEnterTokenInTwo_faInput()
+    {
+        $ga = new \Sonata\GoogleAuthenticator\GoogleAuthenticator();       
+        $token = $ga->getCode('XGH3DJLAAFRC77E5');
+        $this->fillField('two_fa', $token);
     }
 }

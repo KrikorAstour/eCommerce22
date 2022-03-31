@@ -18,16 +18,20 @@
           <label class="mb-2" for="email">Email:</label>
           <input class="form-control" type="text" name="email" id="email" required>
         </div>
-        <div class="mb-4">
+        <div class="mb-3">
           <label class="mb-2" for="password">Password:</label>
           <input class="form-control" type="password" name="password" id="password" required>
+        </div>
+        <div class="mb-4">
+          <label class="mb-2" for="two_fa">2FA Token:</label>
+          <input class="form-control" type="password" name="two_fa" id="two_fa" required>
         </div>
         <div class="mb-5">
           <input class="btn btn-primary" type="submit" value="Login" name="Login">
         </div>
       </form>
       <div class="text-center pt-3">
-        Didn't have an account? <a href="/login/signup" class="link-primary">Sign Up!</a>
+        Didn't have an account? <a href="<?= URLROOT ?>/login/signup" class="link-primary">Sign Up!</a>
       </div>
     </div>
   </div>

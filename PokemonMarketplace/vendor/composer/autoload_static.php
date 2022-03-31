@@ -52,6 +52,7 @@ class ComposerStaticInit7cb64d0187258da47e3058ad8378427b
             'Symfony\\Component\\CssSelector\\' => 30,
             'Symfony\\Component\\Console\\' => 26,
             'Symfony\\Component\\BrowserKit\\' => 29,
+            'Sonata\\GoogleAuthenticator\\' => 27,
         ),
         'P' => 
         array (
@@ -67,6 +68,7 @@ class ComposerStaticInit7cb64d0187258da47e3058ad8378427b
             'GuzzleHttp\\Psr7\\' => 16,
             'GuzzleHttp\\Promise\\' => 19,
             'GuzzleHttp\\' => 11,
+            'Google\\Authenticator\\' => 21,
         ),
         'F' => 
         array (
@@ -164,6 +166,10 @@ class ComposerStaticInit7cb64d0187258da47e3058ad8378427b
         array (
             0 => __DIR__ . '/..' . '/symfony/browser-kit',
         ),
+        'Sonata\\GoogleAuthenticator\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/sonata-project/google-authenticator/src',
+        ),
         'Psr\\Http\\Message\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/http-factory/src',
@@ -200,6 +206,10 @@ class ComposerStaticInit7cb64d0187258da47e3058ad8378427b
         'GuzzleHttp\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
+        ),
+        'Google\\Authenticator\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/sonata-project/google-authenticator/src',
         ),
         'Facebook\\WebDriver\\' => 
         array (

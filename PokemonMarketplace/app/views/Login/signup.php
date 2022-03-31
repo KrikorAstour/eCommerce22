@@ -31,7 +31,7 @@
         </div>
       </form>
       <div class="text-center pt-3">
-        Already have an account? <a href="/login" class="link-primary">Log In!</a>
+        Already have an account? <a href="<?= URLROOT ?>/login" class="link-primary">Log In!</a>
       </div>
     </div>
   </div>

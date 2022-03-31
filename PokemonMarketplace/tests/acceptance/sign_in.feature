@@ -8,16 +8,34 @@ Feature: sign_in
     When I am on "/login"
     Then I should see "PokeMarket"
 
-  Scenario Outline: try signing in while not logged in
+  Scenario Outline: try signing in while not logged in with incorrect 2FA token
+    Given I am not logged in
+    And I am on "/login"
+    When I enter "reimarrosas@example.com" in email input
+    And I enter "reimarrosas" in password input
+    And I enter <token> in two_fa input
+    And I click on "Login"
+    Then I should see "Token Invalid"
+
+    Examples:
+      | token     |
+      | "123456"  |
+      | "23456"   |
+      | "1234567" |
+      | "abcdef"  |
+      | "@!#$%^"  |
+
+  Scenario Outline: try signing in while not logged in with correct 2FA token
     Given I am not logged in
     And I am on "/login"
     When I enter <email> in email input
     And I enter <password> in password input
+    And I enter token in two_fa input
     And I click on "Login"
     Then I should see <result>
 
     Examples:
-      | email                   | password      | result             |
-      | "reimarrosas"           | "reimarrosas" | "Email Invalid"    |
+      | email                     | password      | result             |
+      | "reimarrosas"             | "reimarrosas" | "Email Invalid"    |
       | "reimarrosas@example.com" | "reim"        | "Password Invalid" |
       | "reimarrosas@example.com" | "reimarrosas" | "PokeMarket"       |

@@ -14,11 +14,12 @@ class Users extends Model
         return $this->getSingle();
     }
 
-    public function create_user($email, $password)
+    public function create_user($email, $password, $secret_2fa)
     {
-        $this->query('INSERT INTO users (username, password) VALUES (:email, :password)');
+        $this->query('INSERT INTO users (username, password, secret_2fa) VALUES (:email, :password, :secret_2fa)');
         $this->bind('email', $email);
         $this->bind('password', $password);
+        $this->bind('secret_2fa', $secret_2fa);
         return $this->execute();
     }
 }

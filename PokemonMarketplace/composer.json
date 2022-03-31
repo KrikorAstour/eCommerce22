@@ -5,5 +5,8 @@
         "codeception/module-asserts": "^1.0.0",
         "codeception/module-db": "*",
         "codeception/module-webdriver": "*"
+    },
+    "require": {
+        "sonata-project/google-authenticator": "^2.3"
     }
 }
