@@ -16,3 +16,4 @@ Feature: profile_visibility
     Then I should see "View More"
     But I should not see "Edit"
     And I should not see "Delete"
+    And I should not see "Create Post"

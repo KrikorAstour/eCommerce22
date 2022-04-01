@@ -7,6 +7,10 @@ class Home extends Controller
 
     public function index()
     {
-        $this->view('Home/home');
+        if (empty($_SESSION)) {
+            header('Location: ' . URLROOT . '/login');
+        } else {
+            $this->view('Home/home');
+        }
     }
 }

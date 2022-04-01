@@ -22,4 +22,11 @@ class Users extends Model
         $this->bind('secret_2fa', $secret_2fa);
         return $this->execute();
     }
+
+    public function get_user_by_id($user_id)
+    {
+        $this->query('SELECT * FROM users WHERE user_id = :user_id');
+        $this->bind('user_id', $user_id);
+        return $this->getSingle();
+    }
 }

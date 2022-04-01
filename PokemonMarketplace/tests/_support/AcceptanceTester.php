@@ -74,7 +74,7 @@ class AcceptanceTester extends \Codeception\Actor
      */
     public function iGoToMyProfile()
     {
-        $this->click('Profile');
+        $this->amOnPage('/profile/my_profile');
     }
 
     /**
@@ -138,7 +138,7 @@ class AcceptanceTester extends \Codeception\Actor
      */
     public function iShouldSeeMyUsername()
     {
-        $this->see($_SESSION['username']);
+        $this->see('reimarrosas');
     }
 
     /**

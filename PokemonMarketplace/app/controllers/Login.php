@@ -35,7 +35,7 @@ class Login extends Controller
                 } else if (!$this->ga->checkCode($user->secret_2fa, $result['two_fa'])) {
                     $data['error'] = ['2FA Token Invalid'];
                 } else {
-                    $_SESSION['user_id'] = $user->id;
+                    $_SESSION['user_id'] = $user->user_id;
                     $_SESSION['username'] = $user->username;
                     header('Location: ' . URLROOT);
                     return;
