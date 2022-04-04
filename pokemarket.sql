@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 03, 2022 at 07:28 PM
+-- Generation Time: Apr 04, 2022 at 03:04 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.0.13
 
@@ -76,6 +76,7 @@ CREATE TABLE `offers` (
 CREATE TABLE `posts` (
   `post_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
+  `card_id` int(11) NOT NULL,
   `post_title` varchar(254) NOT NULL,
   `post_description` varchar(1000) NOT NULL,
   `price` double NOT NULL,
@@ -147,11 +148,19 @@ CREATE TABLE `saves` (
 CREATE TABLE `users` (
   `user_id` int(11) NOT NULL,
   `username` varchar(254) NOT NULL,
+  `secret_2fa` varchar(255) NOT NULL,
   `password` varchar(254) NOT NULL,
   `cash_balance` double NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`user_id`, `username`, `secret_2fa`, `password`, `cash_balance`, `created_at`, `updated_at`) VALUES
+(1, 'krikor@test.com', '7K5XRPO54G7UHNFN', '$2y$10$1JS2WK.KjWnR5Bfs5gYd4eYomi7vLljas6QAQxIPTR8PbGyIMH9Si', 0, '2022-04-03 21:42:16', '2022-04-03 21:42:16');
 
 --
 -- Indexes for dumped tables
@@ -185,7 +194,8 @@ ALTER TABLE `offers`
 --
 ALTER TABLE `posts`
   ADD PRIMARY KEY (`post_id`),
-  ADD KEY `FK_USER_ID` (`user_id`);
+  ADD KEY `FK_USER_ID` (`user_id`),
+  ADD KEY `FK_CARD_ID` (`card_id`);
 
 --
 -- Indexes for table `purchases`
@@ -273,7 +283,7 @@ ALTER TABLE `sales`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
@@ -303,6 +313,7 @@ ALTER TABLE `offers`
 -- Constraints for table `posts`
 --
 ALTER TABLE `posts`
+  ADD CONSTRAINT `FK_CARD_ID` FOREIGN KEY (`card_id`) REFERENCES `cards` (`card_id`),
   ADD CONSTRAINT `FK_USER_ID` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 
 --
