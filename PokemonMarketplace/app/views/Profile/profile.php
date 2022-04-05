@@ -6,7 +6,7 @@
     <div class="d-flex justify-content-between align-items-center">
       <h2 class="fw-bold"><?= $data['username'] ?></h2>
       <?php if ($data['is_mine']) : ?>
-        <a href="<? URLROOT ?>/post/create" class="btn btn-success">Create Post</a>
+        <a href="<?= URLROOT ?>/post/create" class="btn btn-success">Create Post</a>
       <?php endif; ?>
     </div>
     <hr class="mb-4">

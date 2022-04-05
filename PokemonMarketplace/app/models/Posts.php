@@ -7,7 +7,7 @@ class Posts extends Model
         parent::__construct();
     }
 
-    public function get_all_posts($user_id)
+    public function get_user_posts($user_id)
     {
         $this->query(
             'SELECT p.post_id, post_title, post_description, price, p.created_at as post_creation, '

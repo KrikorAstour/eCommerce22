@@ -29,4 +29,11 @@ class Users extends Model
         $this->bind('user_id', $user_id);
         return $this->getSingle();
     }
+
+    public function add_balance($user_id,$deposit){
+        $this->query('UPDATE users SET cash_balance = cash_balance + :deposit WHERE user_id = :user_id');
+        $this->bind(':user_id',$user_id);
+        $this->bind(':deposit',$deposit);
+        return $this->execute();
+    }
 }

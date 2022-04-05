@@ -17,7 +17,7 @@ class Profile extends Controller
             if (empty($user)) {
                 header('Location: ' . URLROOT);
             } else {
-                $posts = $this->post_model->get_all_posts($user_id);
+                $posts = $this->post_model->get_user_posts($user_id);
 
                 $data = [
                     'posts' => $posts,
@@ -35,7 +35,7 @@ class Profile extends Controller
         if (empty($_SESSION)) {
             header('Location: ' . URLROOT);
         } else {
-            $posts = $this->post_model->get_all_posts($_SESSION['user_id']);
+            $posts = $this->post_model->get_user_posts($_SESSION['user_id']);
 
             $data = [
                 'posts' => $posts,
@@ -47,6 +47,7 @@ class Profile extends Controller
         }
     }
 
+    
     private function extract_username_from_email($email)
     {
         $parts = explode('@', $email);
