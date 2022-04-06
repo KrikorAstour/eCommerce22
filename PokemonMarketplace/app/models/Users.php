@@ -36,4 +36,11 @@ class Users extends Model
         $this->bind(':deposit',$deposit);
         return $this->execute();
     }
+
+    public function purchase($user_id,$price){
+        $this->query('UPDATE users SET cash_balance = cash_balance - :price WHERE user_id = :user_id');
+        $this->bind(':user_id',$user_id);
+        $this->bind(':price',$price);
+        return $this->execute();
+    }
 }
