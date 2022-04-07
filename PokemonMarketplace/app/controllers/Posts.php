@@ -4,7 +4,7 @@ class Posts extends Controller
     public function __construct()
     {
         $this->user_model = $this->model('Users');
-        $this->post_model = $this->model('Posts');
+        $this->post_model = $this->model('PostModel');
         $this->save_model = $this->model('savedPostModel');
     }
 
