@@ -18,42 +18,30 @@ class Posts extends Controller
         }
     }
 
-    public function save($post_id){
+    public function save_from_profile($post_id, $profile_id)
+    {
         if (empty($_SESSION)) {
             header('Location: ' . URLROOT);
         } else {
-            $save = $this->save_model->getSavedPost($_SESSION['user_id'],$post_id);
-
-            if($save==null){
-                $posts = $this->post_model->get_user_posts($_SESSION['user_id']);
-                $this->save_model->savePost($_SESSION['user_id'],$post_id);
-    
-                $data = [
-                    'posts' => $posts,
-                    'username' => $this->extract_username_from_email($_SESSION['username']),
-                    'is_mine' => true,
-                ];
-    
-                $this->view('Home/home', $data);
-            }
-            else{
-                $posts = $this->post_model->get_user_posts($_SESSION['user_id']);
-                $this->save_model->deleteSavedPost($_SESSION['user_id'],$post_id);
-    
-                $data = [
-                    'posts' => $posts,
-                    'username' => $this->extract_username_from_email($_SESSION['username']),
-                    'is_mine' => true,
-                ];
-    
-                $this->view('Home/home', $data);
-            }
+            $this->save($post_id);
+            header('Location: ' . URLROOT . '/profile/' . $profile_id);
         }
     }
 
-    private function extract_username_from_email($email)
+    public function save_from_home($post_id)
     {
-        $parts = explode('@', $email);
-        return $parts[0];
+        if (!empty($_SESSION)) {
+            $this->save($post_id);
+        }
+        header('Location: ' . URLROOT);
+    }
+
+    private function save($post_id)
+    {
+        $save = $this->save_model->getSavedPost($_SESSION['user_id'], $post_id);
+
+        return $save == null ?
+            $this->save_model->savePost($_SESSION['user_id'], $post_id)
+            : $this->save_model->deleteSavedPost($_SESSION['user_id'], $post_id);
     }
 }
