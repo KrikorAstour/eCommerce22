@@ -19,11 +19,12 @@ class Profile extends Controller
                 header('Location: ' . URLROOT);
             } else {
                 $posts = $this->post_model->get_user_posts($user_id);
+                $posts_with_saves = map_posts_to_users($posts, $this->save_model);
 
                 $data = [
-                    'posts' => $posts,
-                    'username' => $this->extract_username_from_email($user->username),
-                    'is_mine' => $user->user_id == $_SESSION['user_id']
+                    'posts' => $posts_with_saves,
+                    'username' => extract_username_from_email($user->username),
+                    'is_mine' => $_SESSION['user_id'] == $user_id
                 ];
 
                 $this->view('Profile/profile', $data);
@@ -37,53 +38,15 @@ class Profile extends Controller
             header('Location: ' . URLROOT);
         } else {
             $posts = $this->post_model->get_user_posts($_SESSION['user_id']);
+            $posts_with_saves = map_posts_to_users($posts, $this->save_model);
 
             $data = [
-                'posts' => $posts,
-                'username' => $this->extract_username_from_email($_SESSION['username']),
+                'posts' => $posts_with_saves,
+                'username' => extract_username_from_email($_SESSION['username']),
                 'is_mine' => true
             ];
 
             $this->view('Profile/profile', $data);
         }
-    }
-
-    public function save($post_id){
-        if (empty($_SESSION)) {
-            header('Location: ' . URLROOT);
-        } else {
-            $save = $this->save_model->getSavedPost($_SESSION['user_id'],$post_id);
-
-            if($save==null){
-                $posts = $this->post_model->get_user_posts($_SESSION['user_id']);
-                $this->save_model->savePost($_SESSION['user_id'],$post_id);
-    
-                $data = [
-                    'posts' => $posts,
-                    'username' => $this->extract_username_from_email($_SESSION['username']),
-                    'is_mine' => true,
-                ];
-    
-                $this->view('Profile/profile', $data);
-            }
-            else{
-                $posts = $this->post_model->get_user_posts($_SESSION['user_id']);
-                $this->save_model->deleteSavedPost($_SESSION['user_id'],$post_id);
-    
-                $data = [
-                    'posts' => $posts,
-                    'username' => $this->extract_username_from_email($_SESSION['username']),
-                    'is_mine' => true,
-                ];
-    
-                $this->view('Profile/profile', $data);
-            }
-        }
-    }
-
-    private function extract_username_from_email($email)
-    {
-        $parts = explode('@', $email);
-        return $parts[0];
     }
 }

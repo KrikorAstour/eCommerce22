@@ -13,21 +13,15 @@ class Home extends Controller
         if (empty($_SESSION)) {
             header('Location: ' . URLROOT . '/login');
         } else {
-
             $posts = $this->post_model->get_all_posts();
+            $posts_with_saves = map_posts_to_users($posts, $this->save_model);
 
             $data = [
-                'posts' => $posts,
-                'username' => $this->extract_username_from_email($_SESSION['username']),
-                'is_mine' => true
+                'posts' => $posts_with_saves,
+                'login_id' => $_SESSION['user_id']
             ];
-            $this->view('Home/home',$data);
-        }
-    }
 
-    private function extract_username_from_email($email)
-    {
-        $parts = explode('@', $email);
-        return $parts[0];
+            $this->view('Home/home', $data);
+        }
     }
 }

@@ -6,12 +6,12 @@
     <h1>Hello, PokeMarket!</h1>
   </div>
   <div>
-  <hr class="mb-4">
+    <hr class="mb-4">
     <?php foreach ($data['posts'] as $post) : ?>
       <article class="card mb-4 mx-auto post">
         <header class="card-header bg-danger text-white d-flex justify-content-between align-items-center">
-          <h2 class="fs-4"><?= $post->username ?></h2>
-          <a class="<?= $post->save_creation ? 'fa-solid' : 'fa-regular' ?> fa-bookmark link-light fs-4" href="<?= URLROOT ?>/posts/save/<?= $post->post_id ?>"></a>
+          <h2 class="fs-4"><?= extract_username_from_email($post->username); ?></h2>
+          <a class="<?= $post->is_saved_by_me ? 'fa-solid' : 'fa-regular' ?> fa-bookmark link-light fs-4" href="<?= URLROOT ?>/posts/save_from_home/<?= $post->post_id ?>"></a>
         </header>
         <main class="row g-0">
           <div class="col-4 p-2">
@@ -28,7 +28,7 @@
                   Price: <?= $post->price ? '$' . $post->price : 'N/A' ?>
                 </h3>
                 <div>
-                  <?php if ($data['is_mine']) : ?>
+                  <?php if ($post->is_mine) : ?>
                     <a class="link-info me-1" href="<?= URLROOT ?>/post/update/<?= $post->post_id ?>">Edit</a>
                     <a class="link-danger" href="<?= URLROOT ?>/post/delete/<?= $post->post_id ?>">Delete</a>
                   <?php else : ?>

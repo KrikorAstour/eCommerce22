@@ -10,3 +10,21 @@ function isLoggedIn()
     return false;
   }
 }
+
+function extract_username_from_email($email)
+{
+  $parts = explode('@', $email);
+  return $parts[0];
+}
+
+function map_posts_to_users($posts, $save_model)
+{
+  foreach ($posts as $post) {
+    $post_saves = $save_model->get_users_who_saved($post->post_id);
+    $saves = array_map(fn ($saves) => $saves->user_id, $post_saves);
+    $post->is_saved_by_me = in_array($_SESSION['user_id'], $saves);
+    $post->is_mine = $_SESSION['user_id'] == $post->user_id;
+  }
+
+  return $posts;
+}

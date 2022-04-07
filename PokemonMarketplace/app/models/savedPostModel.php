@@ -38,5 +38,11 @@
                 return false;
             }
         }
+
+        public function get_users_who_saved($post_id) {
+            $this->db->query('SELECT * FROM saves WHERE post_id = :post_id');
+            $this->db->bind('post_id', $post_id);
+            return $this->db->getResultSet();
+        }
     }
 ?>
