@@ -6,7 +6,7 @@ I want to be able to manage a balance
 Scenario: try checking user account balance
 Given I am logged in
 And I am on "/deposit"
-Then I should see the "you currently hold a balance of $0.00"
+Then I should see "you currently hold a balance of $0.00"
 
 Scenario: try adding $50.00 to the balance
 Given I am logged in

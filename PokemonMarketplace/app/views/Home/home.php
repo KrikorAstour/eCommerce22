@@ -10,7 +10,7 @@
     <?php foreach ($data['posts'] as $post) : ?>
       <article class="card mb-4 mx-auto post">
         <header class="card-header bg-danger text-white d-flex justify-content-between align-items-center">
-          <h2 class="fs-4"><?= $data['username'] ?></h2>
+          <h2 class="fs-4"><?= $post->username ?></h2>
           <a class="<?= $post->save_creation ? 'fa-solid' : 'fa-regular' ?> fa-bookmark link-light fs-4" href="<?= URLROOT ?>/posts/save/<?= $post->post_id ?>"></a>
         </header>
         <main class="row g-0">
