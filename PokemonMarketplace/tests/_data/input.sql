@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 04, 2022 at 03:04 AM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 8.0.13
+-- Generation Time: Apr 07, 2022 at 05:34 AM
+-- Server version: 10.4.18-MariaDB
+-- PHP Version: 8.0.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -36,6 +36,13 @@ CREATE TABLE `cards` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `cards`
+--
+
+INSERT INTO `cards` (`card_id`, `card_name`, `card_rarity`, `card_image`, `is_offered`, `created_at`, `updated_at`) VALUES
+(1, 'Pikachu', 100, 'https://images.pokemontcg.io/cel25/7_hires.png', 0, '2022-04-07 02:29:39', '2022-04-07 02:29:39');
 
 -- --------------------------------------------------------
 
@@ -82,6 +89,15 @@ CREATE TABLE `posts` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `udpated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `posts`
+--
+
+INSERT INTO `posts` (`post_id`, `user_id`, `card_id`, `post_title`, `post_description`, `price`, `created_at`, `udpated_at`) VALUES
+(1, 1, 1, 'Pikachu', 'Foo Bar Pikachu', 0, '2022-04-07 02:29:40', '2022-04-07 02:29:40'),
+(2, 2, 1, 'Pikachu', 'Foo Bar Pikachu', 0, '2022-04-07 02:29:40', '2022-04-07 02:29:40'),
+(3, 1, 1, 'Pikachu', 'Foo Bar Pikachu', 0, '2022-04-07 03:09:47', '2022-04-07 03:09:47');
 
 -- --------------------------------------------------------
 
@@ -138,6 +154,13 @@ CREATE TABLE `saves` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `saves`
+--
+
+INSERT INTO `saves` (`user_id`, `post_id`, `created_at`, `updated_at`) VALUES
+(1, 1, '2022-04-07 02:41:06', '2022-04-07 02:41:09');
+
 -- --------------------------------------------------------
 
 --
@@ -153,6 +176,18 @@ CREATE TABLE `users` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`user_id`, `username`, `secret_2fa`, `password`, `cash_balance`, `created_at`, `updated_at`) VALUES
+(1, 'reimarrosas@example.com', 'XGH3DJLAAFRC77E5', '$2a$10$6mDG1pAcbqmvr/kv8hU0cuuzAiURgjSR.mJGsm2B79OZlEUXaDyiu', 0, '2022-04-07 02:29:39', '2022-04-07 02:29:39'),
+(2, 'rosasreimar@example.com', 'WO6BAVZ6HKPWN73A', '$2a$10$ot8e88L7uALUypXVK26heOsPFG3O45Er/0geDuLcJLl635m2z/4ee', 0, '2022-04-07 02:29:39', '2022-04-07 02:29:39');
+
+--
+-- Indexes for dumped tables
+--
 
 --
 -- Indexes for table `cards`
@@ -327,54 +362,3 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
-INSERT INTO
-  users (`username`, `password`, `secret_2fa`, `cash_balance`)
-VALUES
-  (
-    'reimarrosas@example.com',
-    '$2a$10$6mDG1pAcbqmvr/kv8hU0cuuzAiURgjSR.mJGsm2B79OZlEUXaDyiu',
-    'XGH3DJLAAFRC77E5',
-    0.0
-  );
-
-INSERT INTO
-  users (`username`, `password`, `secret_2fa`, `cash_balance`)
-VALUES
-  (
-    'rosasreimar@example.com',
-    '$2a$10$ot8e88L7uALUypXVK26heOsPFG3O45Er/0geDuLcJLl635m2z/4ee',
-    'WO6BAVZ6HKPWN73A',
-    0.0
-  );
-
-INSERT INTO
-  cards (`card_name`, `card_rarity`, `card_image`, `is_offered`)
-VALUES
-  (
-    'Pikachu',
-    100,
-    'https://images.pokemontcg.io/cel25/7_hires.png',
-    false
-  );
-
-INSERT INTO
-  posts (`user_id`, `card_id`, `post_title`, `post_description`, `price`)
-VALUES
-  (
-    1,
-    1,
-    'Pikachu',
-    'Foo Bar Pikachu',
-    0.0
-  );
-
-INSERT INTO
-  posts (`user_id`, `card_id`, `post_title`, `post_description`)
-VALUES
-  (
-    2,
-    1,
-    'Pikachu',
-    'Foo Bar Pikachu'
-  );
