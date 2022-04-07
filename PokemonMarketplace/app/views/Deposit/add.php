@@ -20,7 +20,7 @@
           <input class="form-control" type="number" name="amount" id="amount" required>
         </div>
         <div class="mb-5">
-          <input class="btn btn-primary" type="submit" value="Add" name="Add">
+          <input class="btn btn-primary" type="submit" value="Add" name="Add" id="Add">
         </div>
       </form>
   </div>
