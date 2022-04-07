@@ -14,7 +14,7 @@
         }
 
         public function savePost($user_id,$post_id){
-            $this->db->query("INSERT INTO Saves (user_id,post_id) VALUES (:user_id,:post_id");
+            $this->db->query("INSERT INTO saves (user_id,post_id) VALUES (:user_id,:post_id)");
             $this->db->bind(":user_id",$user_id);
             $this->db->bind(":post_id",$post_id);
 
