@@ -24,6 +24,7 @@ class Profile extends Controller
                 $data = [
                     'posts' => $posts_with_saves,
                     'username' => extract_username_from_email($user->username),
+                    'user_id' => $user->user_id,
                     'is_mine' => $_SESSION['user_id'] == $user_id
                 ];
 
@@ -43,6 +44,7 @@ class Profile extends Controller
             $data = [
                 'posts' => $posts_with_saves,
                 'username' => extract_username_from_email($_SESSION['username']),
+                'user_id' => $_SESSION['user_id'],
                 'is_mine' => true
             ];
 

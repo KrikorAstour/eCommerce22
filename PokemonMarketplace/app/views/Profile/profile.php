@@ -14,7 +14,7 @@
       <article class="card mb-4 mx-auto post">
         <header class="card-header bg-danger text-white d-flex justify-content-between align-items-center">
           <h2 class="fs-4"><?= $data['username'] ?></h2>
-          <a class="<?= $post->is_saved_by_me ? 'fa-solid saved' : 'fa-regular save' ?> fa-bookmark link-light fs-4" href="<?= URLROOT ?>/posts/save_from_profile/<?= $post->post_id . '/' . $data['login_id'] ?>"></a>
+          <a class="<?= $post->is_saved_by_me ? 'fa-solid saved' : 'fa-regular save' ?> fa-bookmark link-light fs-4" href="<?= URLROOT ?>/posts/save_from_profile/<?= $post->post_id . '/' . $data['user_id'] ?>"></a>
         </header>
         <main class="row g-0">
           <div class="col-4 p-2">
