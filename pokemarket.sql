@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 13, 2022 at 08:14 PM
+-- Generation Time: Apr 13, 2022 at 08:43 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.15
 
@@ -50,7 +50,7 @@ CREATE TABLE `comments` (
   `post_id` int(11) NOT NULL,
   `comment` varchar(300) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
