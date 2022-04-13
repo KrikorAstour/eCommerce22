@@ -2,10 +2,10 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Apr 04, 2022 at 03:04 AM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 8.0.13
+-- Host: localhost
+-- Generation Time: Apr 13, 2022 at 08:14 PM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 8.0.15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -48,6 +48,7 @@ CREATE TABLE `comments` (
   `comment_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `post_id` int(11) NOT NULL,
+  `comment` varchar(300) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
