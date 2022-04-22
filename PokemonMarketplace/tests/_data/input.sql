@@ -171,6 +171,7 @@ CREATE TABLE `users` (
   `user_id` int(11) NOT NULL,
   `username` varchar(254) NOT NULL,
   `secret_2fa` varchar(255) NOT NULL,
+  `try_2fa` tinyint(3) unsigned DEFAULT 3,
   `password` varchar(254) NOT NULL,
   `cash_balance` double NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
@@ -181,9 +182,9 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `username`, `secret_2fa`, `password`, `cash_balance`, `created_at`, `updated_at`) VALUES
-(1, 'reimarrosas@example.com', 'XGH3DJLAAFRC77E5', '$2a$10$6mDG1pAcbqmvr/kv8hU0cuuzAiURgjSR.mJGsm2B79OZlEUXaDyiu', 0, '2022-04-07 02:29:39', '2022-04-07 02:29:39'),
-(2, 'rosasreimar@example.com', 'WO6BAVZ6HKPWN73A', '$2a$10$ot8e88L7uALUypXVK26heOsPFG3O45Er/0geDuLcJLl635m2z/4ee', 0, '2022-04-07 02:29:39', '2022-04-07 02:29:39');
+INSERT INTO `users` (`user_id`, `username`, `secret_2fa`, `try_2fa`, `password`, `cash_balance`, `created_at`, `updated_at`) VALUES
+(1, 'reimarrosas@example.com', 'XGH3DJLAAFRC77E5', 3, '$2a$10$6mDG1pAcbqmvr/kv8hU0cuuzAiURgjSR.mJGsm2B79OZlEUXaDyiu', 0, '2022-04-07 02:29:39', '2022-04-07 02:29:39'),
+(2, 'rosasreimar@example.com', 'WO6BAVZ6HKPWN73A', 0, '$2a$10$ot8e88L7uALUypXVK26heOsPFG3O45Er/0geDuLcJLl635m2z/4ee', 0, '2022-04-07 02:29:39', '2022-04-07 02:29:39');
 
 --
 -- Indexes for dumped tables

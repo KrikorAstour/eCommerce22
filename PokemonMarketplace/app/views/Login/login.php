@@ -24,7 +24,7 @@
         </div>
         <div class="mb-4">
           <label class="mb-2" for="two_fa">2FA Token:</label>
-          <input class="form-control" type="password" name="two_fa" id="two_fa" required>
+          <input class="form-control" type="password" name="two_fa" id="two_fa">
         </div>
         <div class="mb-5">
           <input class="btn btn-primary" type="submit" value="Login" name="Login">

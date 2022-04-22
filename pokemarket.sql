@@ -151,6 +151,7 @@ CREATE TABLE `users` (
   `username` varchar(254) NOT NULL,
   `secret_2fa` varchar(255) NOT NULL,
   `password` varchar(254) NOT NULL,
+  `try_2fa` tinyint(3) unsigned DEFAULT 3,
   `cash_balance` double NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()

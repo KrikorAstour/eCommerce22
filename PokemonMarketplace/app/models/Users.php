@@ -30,17 +30,26 @@ class Users extends Model
         return $this->getSingle();
     }
 
-    public function add_balance($user_id,$deposit){
+    public function add_balance($user_id, $deposit)
+    {
         $this->query('UPDATE users SET cash_balance = cash_balance + :deposit WHERE user_id = :user_id');
-        $this->bind(':user_id',$user_id);
-        $this->bind(':deposit',$deposit);
+        $this->bind(':user_id', $user_id);
+        $this->bind(':deposit', $deposit);
         return $this->execute();
     }
 
-    public function purchase($user_id,$price){
+    public function purchase($user_id, $price)
+    {
         $this->query('UPDATE users SET cash_balance = cash_balance - :price WHERE user_id = :user_id');
-        $this->bind(':user_id',$user_id);
-        $this->bind(':price',$price);
+        $this->bind(':user_id', $user_id);
+        $this->bind(':price', $price);
+        return $this->execute();
+    }
+
+    public function reduce_2fa_tries($user_id)
+    {
+        $this->query('UPDATE users SET try_2fa = try_2fa - 1 WHERE user_id = :user_id');
+        $this->bind('user_id', $user_id);
         return $this->execute();
     }
 }

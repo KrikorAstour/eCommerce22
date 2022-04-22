@@ -8,6 +8,20 @@ Feature: sign_in
     When I am on "/login"
     Then I should see "PokeMarket"
 
+  Scenario Outline: try signing in without 2FA
+    Given I am not logged in
+    And I am on "/login"
+    When I enter <email> in email input
+    And I enter <password> in password input
+    And I click on "Login"
+    Then I should see <result>
+    And I should see <tries>
+
+    Examples:
+      | email                     | password      | result    | tries           |
+      | "reimarrosas@example.com" | "reimarrosas" | "QR Code" | "2 more tries"  |
+      | "rosasreimar@example.com" | "reimarrosas" | "Login"   | "No more tries" |
+
   Scenario Outline: try signing in while not logged in with incorrect 2FA token
     Given I am not logged in
     And I am on "/login"
