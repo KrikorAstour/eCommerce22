@@ -183,7 +183,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `username`, `secret_2fa`, `try_2fa`, `password`, `cash_balance`, `created_at`, `updated_at`) VALUES
-(1, 'reimarrosas@example.com', 'XGH3DJLAAFRC77E5', 3, '$2a$10$6mDG1pAcbqmvr/kv8hU0cuuzAiURgjSR.mJGsm2B79OZlEUXaDyiu', 0, '2022-04-07 02:29:39', '2022-04-07 02:29:39'),
+(1, 'reimarrosas@example.com', 'XGH3DJLAAFRC77E5', 3, '$2a$10$6mDG1pAcbqmvr/kv8hU0cuuzAiURgjSR.mJGsm2B79OZlEUXaDyiu', 1000, '2022-04-07 02:29:39', '2022-04-07 02:29:39'),
 (2, 'rosasreimar@example.com', 'WO6BAVZ6HKPWN73A', 0, '$2a$10$ot8e88L7uALUypXVK26heOsPFG3O45Er/0geDuLcJLl635m2z/4ee', 0, '2022-04-07 02:29:39', '2022-04-07 02:29:39');
 
 --
