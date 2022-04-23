@@ -7,6 +7,7 @@ class Profile extends Controller
         $this->user_model = $this->model('Users');
         $this->post_model = $this->model('PostModel');
         $this->save_model = $this->model('savedPostModel');
+        $this->offer_model = $this->model('OfferModel');
     }
 
     public function index($user_id)
@@ -19,7 +20,7 @@ class Profile extends Controller
                 header('Location: ' . URLROOT);
             } else {
                 $posts = $this->post_model->get_user_posts($user_id);
-                $posts_with_saves = map_posts_to_users($posts, $this->save_model);
+                $posts_with_saves = map_posts_to_users($posts, $this->save_model, $this->offer_model);
 
                 $data = [
                     'posts' => $posts_with_saves,
@@ -39,7 +40,7 @@ class Profile extends Controller
             header('Location: ' . URLROOT);
         } else {
             $posts = $this->post_model->get_user_posts($_SESSION['user_id']);
-            $posts_with_saves = map_posts_to_users($posts, $this->save_model);
+            $posts_with_saves = map_posts_to_users($posts, $this->save_model, $this->offer_model);
 
             $data = [
                 'posts' => $posts_with_saves,

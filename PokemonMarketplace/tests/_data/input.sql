@@ -187,6 +187,14 @@ INSERT INTO `users` (`user_id`, `username`, `secret_2fa`, `try_2fa`, `password`,
 (2, 'rosasreimar@example.com', 'WO6BAVZ6HKPWN73A', 0, '$2a$10$ot8e88L7uALUypXVK26heOsPFG3O45Er/0geDuLcJLl635m2z/4ee', 0, '2022-04-07 02:29:39', '2022-04-07 02:29:39');
 
 --
+-- Dumping data for table `offers`
+--
+
+INSERT INTO `offers` (`offer_id`, `user_id`, `post_id`, `offer_price`) VALUES
+(1, 2, 1, 4.55),
+(2, 2, 1, 6.88);
+
+--
 -- Indexes for dumped tables
 --
 
