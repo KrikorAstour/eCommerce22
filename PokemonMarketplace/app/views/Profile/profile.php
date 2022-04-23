@@ -43,12 +43,12 @@
           </div>
         </main>
         <footer class="card-footer">
-          <ul class="nav nav-tabs" id="commentsOffers" role="tablist">
+          <ul class="nav nav-tabs" id="commentsOffers<?= $post->post_id ?>" role="tablist">
             <li class="nav-item" role="presentation">
-              <button class="nav-link active" id="comment-tab" data-bs-toggle="tab" data-bs-target="#comment" type="button" role="tab" aria-controls="comment">Comments</button>
+              <button class="nav-link active" id="comment-tab<?= $post->post_id ?>" data-bs-toggle="tab" data-bs-target="#comment" type="button" role="tab" aria-controls="comment">Comments</button>
             </li>
             <li class="nav-item" role="presentation">
-              <button class="nav-link" id="offer-tab" data-bs-toggle="tab" data-bs-target="#offer" type="button" role="tab" aria-controls="offer">Offers</button>
+              <button class="nav-link" id="offer-tab<?= $post->post_id ?>" data-bs-toggle="tab" data-bs-target="#offer" type="button" role="tab" aria-controls="offer">Offers</button>
             </li>
           </ul>
           <div class="tab-content" id="commentsOffersContent">
@@ -59,7 +59,7 @@
               <div class="list-group pt-2">
                 <?php $count = 0; ?>
                 <?php foreach ($post->offers as $offer) : ?>
-                  <a href="<?= URLROOT ?>/offer/accept" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                  <a href="<?= URLROOT ?>/offer/accept" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" id="offers<?= $offer->offer_id ?>">
                     <span class="h5"><strong><?= $offer->username ?></strong> offers
                       <?php if ($count == 0) : ?>
                         <strong class="text-danger">
