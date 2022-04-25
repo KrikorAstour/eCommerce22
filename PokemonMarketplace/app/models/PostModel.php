@@ -4,9 +4,61 @@ class PostModel extends Model
 {
     public function __construct()
     {
+        $this->db = new Model;
         parent::__construct();
     }
 
+    public function createPost($data, $user_id, $card_id){
+        $this->query('INSERT INTO posts (user_id, card_id, post_title, post_description, post_price) 
+                        VALUES (:user_id, :card_id, :post_title, :post_description, :post_price)'
+                    );
+                         
+        $this->bind('user_id', $user_id);
+        $this->bind('card_id', $card_id);     
+        $this->bind('post_title', $data['post_title']);
+        $this->bind('post_description', $data['post_description']);
+        $this->bind('post_price', $data['post_price']);
+        
+            
+        return $this->execute();
+    }
+    
+    public function getCardId($card_image){
+        $this->query('SELECT card_id FROM cards WHERE card_image=:card_image');
+        $this->bind('card_image', $card_image);
+        
+        return $this->getSingle();
+    }
+
+    public function createCard($data){
+        $this->query('INSERT INTO cards (card_name, card_rarity, card_image) 
+        VALUES (:card_name, :card_rarity, :card_image)'
+    );
+
+        $this->bind('card_name', $data['card_name']);
+        $this->bind('card_rarity', $data['card_rarity']);
+        $this->bind('card_image', $data['card_image']);
+        
+        return $this->execute();
+    }
+
+    public function deletePost($post_id){
+        $this->query('DELETE FROM posts WHERE post_id = :post_id');
+        $this->bind('post_id', $post_id);
+        return $this->execute();
+    }
+    
+    public function updatePost($data, $post_id){
+        $this->query('UPDATE posts SET post_title=:post_title, post_description=:post_description post_price=:post_price Where post_id=:post_id');
+        $this->bind('post_title', $data['post_title']);
+        $this->bind('post_description', $data['post_text']);
+        $this->bind('post_price', $data['post_price']);
+
+        $this->bind('post_id', $post_id);
+        
+        return $this->execute();
+    }
+    
     public function get_user_posts($user_id)
     {
         $this->query(
@@ -18,6 +70,12 @@ class PostModel extends Model
         );
         $this->bind('user_id', $user_id);
         return $this->getResultSet();
+    }
+    
+    public function getPost($post_id){
+        $this->query('SELECT card_id, post_title, post_description, post_price From posts WHERE post_id=:post_id');
+        $this->bind('post_id', $post_id);
+        return $this->execute();
     }
 
     public function get_all_posts()
