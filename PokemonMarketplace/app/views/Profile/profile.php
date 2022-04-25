@@ -5,8 +5,8 @@
   <div>
     <div class="d-flex justify-content-between align-items-center">
       <h2 class="fw-bold"><?= $data['username'] ?></h2>
-      <?php if ($data['is_mine']) : ?>
-        <a href="<?= URLROOT ?>/post/create" class="btn btn-success">Create Post</a>
+      <?php  if ($data['is_mine']) : ?> 
+        <a href="<?= URLROOT ?>/Posts/createCard" class="btn btn-success">Create Post</a>
       <?php endif; ?>
     </div>
     <hr class="mb-4">
@@ -32,8 +32,8 @@
                 </h3>
                 <div>
                   <?php if ($data['is_mine']) : ?>
-                    <a class="link-info me-1" href="<?= URLROOT ?>/post/update/<?= $post->post_id ?>">Edit</a>
-                    <a class="link-danger" href="<?= URLROOT ?>/post/delete/<?= $post->post_id ?>">Delete</a>
+                    <a class="link-info me-1" href="<?= URLROOT ?>/Posts/updatePost/<?= $post->post_id ?>">Edit</a>
+                    <a class="link-danger" href="<?= URLROOT ?>/Posts/deletePost/<?= $post->post_id ?>">Delete</a>
                   <?php else : ?>
                     <a href="<?= URLROOT ?>/post/<?= $post->post_id ?>" class="link-info">View More</a>
                   <?php endif; ?>
