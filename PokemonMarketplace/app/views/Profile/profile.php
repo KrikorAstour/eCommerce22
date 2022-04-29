@@ -9,6 +9,21 @@
         <a href="<?= URLROOT ?>/Posts/createCard" class="btn btn-success">Create Post</a>
       <?php endif; ?>
     </div>
+    <div class="d-flex flex-row align-items-left">
+    <form action="" method="POST">
+    <fieldset class="rating">
+  <input type="radio" id="star5" name="rating" value="5" /><label class="bi bi-star-fill" for="star5" title="5 stars"></label>
+  <input type="radio" id="star4" name="rating" value="4" /><label class="bi bi-star-fill" for="star4" title="4 stars"></label>
+  <input type="radio" id="star3" name="rating" value="3" /><label class="bi bi-star-fill" for="star3" title="3 stars"></label>
+  <input type="radio" id="star2" name="rating" value="2" /><label class="bi bi-star-fill" for="star2" title="2 stars"></label>
+  <input type="radio" id="star1" name="rating" value="1" /><label class="bi bi-star-fill" for="star1" title="1 star"></label>
+</fieldset>
+<input type="submit" name="rate" value="Give Rating!" class="btn btn-info ">
+    </form>
+
+      
+</div>
+      </div>
     <hr class="mb-4">
     <?php foreach ($data['posts'] as $post) : ?>
       <article class="card mb-4 mx-auto post" id="post_num_<?= $post->post_id ?>">
