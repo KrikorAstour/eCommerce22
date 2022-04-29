@@ -4,6 +4,18 @@
         public function __construct(){
             parent::__construct();
         }
+        
+        public function getAllComments(){
+            $this->query("SELECT c.comment, c.updated_at,
+                                 u.username, u.user_id, p.post_id
+                          FROM comments AS c
+                          JOIN users AS u ON c.user_id = u.user_id 
+                          JOIN posts AS p ON c.post_id = p.post_id ");
+
+
+            return $this->getResultSet();
+        }
+
 
         public function getPostComments($post_id){
             $this->query("SELECT c.comment, c.updated_at,

@@ -6,6 +6,7 @@ class Posts extends Controller
         $this->user_model = $this->model('Users');
         $this->post_model = $this->model('PostModel');
         $this->save_model = $this->model('savedPostModel');
+        $this->comment_model = $this->model("commentModel");
     }
 
     public function index()
@@ -116,5 +117,39 @@ class Posts extends Controller
         return $save == null ?
             $this->save_model->savePost($_SESSION['user_id'], $post_id)
             : $this->save_model->deleteSavedPost($_SESSION['user_id'], $post_id);
+    }
+
+    public function addComment($post_id){
+        if (empty($_SESSION)) {
+            header('Location: ' . URLROOT . '/login');
+        } else {
+            $posts = $this->post_model->get_all_posts();
+            $posts_with_saves = map_posts_to_users($posts, $this->save_model, $this->offer_model);
+            $comments = $this->comment_model->getAllComments();
+
+            $data = [
+                'posts' => $posts_with_saves,
+                'comments' => $comments,
+                'login_id' => $_SESSION['user_id'],
+                'error' => ''
+            ];
+
+            if(!isset($_POST['comment'])){
+                $this->view('Home/home', $data);  // to be changed
+            }
+            else{
+                $data = [
+                    'comment' => $_POST['comment_text']
+                ];
+
+                if($this->comment_model->createComment($post_id,$_SESSION['user_id'],$data['comment'])){
+                    echo '<meta http-equiv="refresh" content="2;url=' . URLROOT . '/posts/' . $post_id . '" />';
+                }
+            }
+            
+            
+
+            $this->view('Home/home', $data);
+        }
     }
 }
