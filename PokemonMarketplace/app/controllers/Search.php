@@ -9,7 +9,7 @@
         }
 
         public function getResult(){
-            var_dump($_POST['search_text']);
+            
 
             if(isset($_POST['search']) && $_POST['search_type'] == "newFirst"){
                 $data = $_POST['search_text'];
