@@ -13,7 +13,7 @@
           <a class="nav-link active" href="<?= URLROOT ?>/saves">Saves</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="<?= URLROOT ?>/transactions">Transactions</a>
+          <a class="nav-link active" href="<?= URLROOT ?>/transactions">Transactisons</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active" href="<?= URLROOT ?>/deposit">Deposit</a>
@@ -25,6 +25,7 @@
       <form class="d-flex mb-0 ms-auto">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
+        
       </form>
     </div>
   </div>
