@@ -3,7 +3,7 @@
 
 <div class="container">
   <div class="w-75 mx-auto">
-    <h1>Hello, PokeMarket!</h1>
+    <h1>Search Result</h1>
   </div>
   <div>
     <hr class="mb-4">
@@ -45,4 +45,3 @@
   </div>
 </div>
 
-<?php require APPROOT . '/views/includes/footer.php'; ?>

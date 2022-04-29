@@ -22,9 +22,15 @@
           <a class="nav-link active" href="<?= URLROOT ?>/login/logout">Logout</a>
         </li>
       </ul>
-      <form class="d-flex mb-0 ms-auto">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
+      <form class="d-flex mb-0 ms-auto" action="/eCommerce22/PokemonMarketplace/Search/getResult/" mthode="POST">
+        <input class="form-control me-2" name="search_text" type="search" placeholder="Search" aria-label="Search">
+        <select name="search_type">
+              <option value="newFirst" selected>newest to oldest</option>
+              <option value="oldFirst">oldest to newest</option>
+              <option value="highFirst">higher price first</option>
+              <option value="lowFirst">lower price first</option>
+            </select>
+        <button class="btn btn-outline-success" type="submit" name="search">Search</button>
         
       </form>
     </div>
