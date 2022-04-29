@@ -1,3 +1,4 @@
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-5">
   <div class="container">
     <a class="navbar-brand" href="<?= URLROOT ?>">PokeMarket</a>
@@ -30,7 +31,14 @@
               <option value="highFirst">higher price first</option>
               <option value="lowFirst">lower price first</option>
             </select>
-        <button class="btn btn-outline-success" type="submit" name="search">Search</button>
+            <select name="rarity" style="margin-left: 10px">
+              <option value="all" selected>All</option>
+              <option value="oldFirst">Common</option>
+              <option value="rare">Rare</option>
+              <option value="epic">Epic</option>
+              <option value="legendary">Legendary</option>
+            </select>
+        <button class="btn btn-outline-success" type="submit" name="search" style="margin-left: 10px">Search</button>
         
       </form>
     </div>

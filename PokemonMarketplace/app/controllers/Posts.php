@@ -32,11 +32,10 @@ class Posts extends Controller
                     'post_price' => $_POST['post_price'],
                     'post_description' => $_POST['post_description']
                 ];
+                $isSucc = $this->post_model->createCard($data);
+                $card_id = $this->post_model->getCardId($data['card_image']);
                 
-                $isSucc = $this->PostModel->createCard($data);
-                $card_id = $this->PostModel->getCardId($data['card_image']);
-                
-                $isSucc2 = $this->PostModel->createPost($data, $_SESSION['user_id'], $card_id->card_id);
+                $isSucc2 = $this->post_model->createPost($data, $_SESSION['user_id'], $card_id->card_id);
                 if($isSucc2){
                     echo 'Uploading the Post!';
                    echo '<meta http-equiv="Refresh" content="2; url=/eCommerce22/PokemonMarketplace/Profile/my_profile">';
