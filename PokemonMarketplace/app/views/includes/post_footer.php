@@ -10,6 +10,53 @@
                 <div class="tab-content" id="commentsOffersContent">
                     <div class="tab-pane fade" id="comment<?= $post->post_id ?>" role="tabpanel" aria-labelledby="comment-tab">
                         <!-- [!INSERT COMMENTS HERE!] -->
+                        <div class="container p-4">
+<div class="row bootstrap snippets bootdeys">
+    <div class="col-md-12 col-sm-16">
+        <div class="comment-wrapper">
+            <div class="panel panel-info">
+                
+                <div class="panel-body">
+                    <form action="URLROOT" method="POST">
+                    
+                        <textarea class="form-control" placeholder="write a comment..." rows="3" name="comment_text" required></textarea>
+                        <br>
+                        <button type="button" class="btn btn-info float-end" name="comment">Comment</button>
+                        <div class="clearfix"></div>
+                        <hr>
+                    </form>
+                    <ul class="media-list">
+                        <?php foreach($data['comments'] as $comment) : ?>
+                            <?php if($post->post_id == $comment->post_id) : ?>
+                                <li class="media">
+                            <div class="media-body">
+                            <strong class="text-success"><?= extract_username_from_email($comment->username); ?></strong>
+                                <span class="text-muted ">
+                                    <small class="text-muted"><?= $comment->updated_at ?></small>
+                                </span>
+                                
+                                <p>
+                                    <?= $comment->comment ?>
+                                </p>
+                            </div>
+                        </li>
+                        <?php endif; ?>
+                        <?php endforeach;?>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+
+
+
+
+
+                        
                     </div>
                     <div class="tab-pane fade" id="offer<?= $post->post_id ?>" role="tabpanel" aria-labelledby="offer-tab<?= $post->post_id ?>">
                         <ul class="list-group pt-2">
