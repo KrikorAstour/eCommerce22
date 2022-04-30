@@ -15,12 +15,14 @@ class Saves extends Controller
         if (empty($_SESSION)) {
             header('Location: ' . URLROOT . '/login');
         } else {
+            $count = $this->save_model->getUserSavesCount($_SESSION['user_id']);
             $posts = $this->save_model->getUserSavedPosts($_SESSION['user_id']);
             $posts_with_saves = map_posts_to_users($posts, $this->save_model, $this->offer_model);
             $comments = $this->comment_model->getAllComments();
 
 
             $data = [
+                'total' =>  $count,
                 'posts' => $posts_with_saves,
                 'comments' => $comments,
                 'login_id' => $_SESSION['user_id']

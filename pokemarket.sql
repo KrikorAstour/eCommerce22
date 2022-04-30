@@ -2,10 +2,10 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Apr 13, 2022 at 08:43 PM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 8.0.15
+-- Host: 127.0.0.1
+-- Generation Time: Apr 30, 2022 at 09:05 PM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 8.0.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,11 +29,9 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `cards` (
   `card_id` int(11) NOT NULL,
-  `post_id` int(11) NOT NULL,
   `card_name` varchar(254) NOT NULL,
   `card_rarity` int(11) NOT NULL,
   `card_image` varchar(500) NOT NULL,
-  `is_offered` tinyint(1) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -80,7 +78,8 @@ CREATE TABLE `posts` (
   `card_id` int(11) NOT NULL,
   `post_title` varchar(254) NOT NULL,
   `post_description` varchar(1000) NOT NULL,
-  `price` double NOT NULL,
+  `post_price` double NOT NULL,
+  `isOffered` tinyint(1) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `udpated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -151,18 +150,11 @@ CREATE TABLE `users` (
   `username` varchar(254) NOT NULL,
   `secret_2fa` varchar(255) NOT NULL,
   `password` varchar(254) NOT NULL,
-  `try_2fa` tinyint(3) unsigned DEFAULT 3,
+  `try_2fa` tinyint(3) UNSIGNED DEFAULT 3,
   `cash_balance` double NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`user_id`, `username`, `secret_2fa`, `password`, `cash_balance`, `created_at`, `updated_at`) VALUES
-(1, 'krikor@test.com', '7K5XRPO54G7UHNFN', '$2y$10$1JS2WK.KjWnR5Bfs5gYd4eYomi7vLljas6QAQxIPTR8PbGyIMH9Si', 0, '2022-04-03 21:42:16', '2022-04-03 21:42:16');
 
 --
 -- Indexes for dumped tables
@@ -172,8 +164,7 @@ INSERT INTO `users` (`user_id`, `username`, `secret_2fa`, `password`, `cash_bala
 -- Indexes for table `cards`
 --
 ALTER TABLE `cards`
-  ADD PRIMARY KEY (`card_id`),
-  ADD KEY `FK_USER_ID_CARDS` (`post_id`);
+  ADD PRIMARY KEY (`card_id`);
 
 --
 -- Indexes for table `comments`
@@ -243,7 +234,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `cards`
 --
 ALTER TABLE `cards`
-  MODIFY `card_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `card_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `comments`
@@ -261,7 +252,7 @@ ALTER TABLE `offers`
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `purchases`
@@ -285,17 +276,11 @@ ALTER TABLE `sales`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `cards`
---
-ALTER TABLE `cards`
-  ADD CONSTRAINT `FK_USER_ID_CARDS` FOREIGN KEY (`post_id`) REFERENCES `posts` (`post_id`);
 
 --
 -- Constraints for table `comments`

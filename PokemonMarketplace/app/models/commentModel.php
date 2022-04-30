@@ -31,7 +31,7 @@
 
         public function createComment($post_id,$user_id,$comment){
             $this->query("INSERT INTO comments (post_id,user_id,comment) 
-                          VALUES (:post_id,:user_id,:comment");
+                          VALUES (:post_id,:user_id,:comment)");
 
             $this->bind(":post_id",$post_id);
             $this->bind(":user_id",$user_id);
