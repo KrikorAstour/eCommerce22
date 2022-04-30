@@ -46,7 +46,7 @@ class Posts extends Controller
     public function deletePost($postId)
     {
         $userId = $_SESSION['user_id'];
-        $isSucc = $this->PostModel->deletePost($postId);
+        $isSucc = $this->post_model->deletePost($postId);
         
         if ($isSucc) {
             echo '<h5 class="text-danger">Deleting The Post!</h5>';
