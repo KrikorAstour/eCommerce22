@@ -17,14 +17,14 @@
             <div class="panel panel-info">
                 
                 <div class="panel-body">
-                    <form action="URLROOT" method="POST">
+                    <form action="<?= URLROOT ?>/posts/addComment/<?= $post->post_id ?>" method="POST">
                     
                         <textarea class="form-control" placeholder="write a comment..." rows="3" name="comment_text" required></textarea>
                         <br>
-                        <button type="button" class="btn btn-info float-end" name="comment">Comment</button>
+                        <input type="submit" class="btn btn-info float-end" name="comment" value="Add Comment"></button>
                         <div class="clearfix"></div>
-                        <hr>
-                    </form>
+                        
+                    </form><hr>
                     <ul class="media-list">
                         <?php foreach($data['comments'] as $comment) : ?>
                             <?php if($post->post_id == $comment->post_id) : ?>
