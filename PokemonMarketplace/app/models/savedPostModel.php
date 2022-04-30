@@ -4,6 +4,16 @@
         public function __construct(){
             $this->db = new Model;
         }
+        
+        public function getUserSavesCount($user_id){
+            $this->db->query('SELECT (COUNT(post_id)) as count  
+                                FROM saves
+                                WHERE user_id = :user_id');
+
+            $this->db->bind(":user_id",$user_id);
+  
+            return $this->db->getSingle();
+        }
 
         public function getUserSavedPosts($user_id){
             $this->db->query('SELECT s.post_id,  

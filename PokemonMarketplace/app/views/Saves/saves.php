@@ -3,7 +3,7 @@
 
 <div class="container">
   <div class="w-75 mx-auto">
-    <h1>My saved posts</h1>
+    <h1>My saved posts (<?= $data['total']->count ?>)</h1>
   </div>
   <div>
     <hr class="mb-4">
