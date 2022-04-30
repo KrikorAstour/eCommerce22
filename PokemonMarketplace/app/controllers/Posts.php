@@ -60,7 +60,7 @@ class Posts extends Controller
     
     public function updatePost($post_Id){
         $this->view('Post/updatePost');
-        $post = $this->PostModel->getPost($post_Id);
+        $post = $this->post_model->getPost($post_Id);
         $data = [
             "post" => $post
         ];
@@ -84,7 +84,7 @@ class Posts extends Controller
             else{
                 $data['is_offered'] = '0';
             }
-            if($this->PostModel->updatePost($data, $post_Id)){
+            if($this->post_model->updatePost($data, $post_Id)){
                     echo 'Updating your post!';
                     echo '<meta http-equiv="refresh" content="0;url=' . URLROOT . '/profile/my-proffile' . $userId . '" />';
                 }
