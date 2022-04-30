@@ -6,15 +6,15 @@
         }
 
         public function getUserSavedPosts($user_id){
-            $this->db->query(
-                'SELECT p.post_id, post_title, post_description, price, p.created_at as post_creation, '
-                    . 'card_name, card_rarity, card_image, p.user_id, u.username '
-                    . 'FROM posts as p '
-                    . 'JOIN cards as c ON p.card_id = c.card_id '
-                    . 'JOIN users as u ON p.user_id = u.user_id '
-                    . 'JOIN saves as s ON p.user_id = s.user_id '
-                    . 'WHERE s.user_id = :user_id '
-            );
+            $this->db->query('SELECT s.post_id,  
+                                p.post_title, p.post_description, p.price, p.created_at as post_creation, 
+                                c.card_name, c.card_rarity, c.card_image, p.user_id, u.username 
+                                FROM saves as s 
+                                JOIN posts as p ON s.post_id = p.post_id 
+                                JOIN users as u ON p.user_id = u.user_id 
+                                JOIN cards as c ON p.card_id = c.card_id 
+                                WHERE s.user_id = :user_id');
+
             $this->db->bind(":user_id",$user_id);
             
 
