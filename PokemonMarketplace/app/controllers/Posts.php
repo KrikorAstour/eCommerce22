@@ -109,6 +109,13 @@ class Posts extends Controller
         header('Location: ' . URLROOT);
     }
 
+    public function unsave_from_saves($post_id){
+        if (!empty($_SESSION)) {
+            $this->save($post_id);
+        }
+        header('Location: ' . URLROOT . '/saves');
+    }
+
     private function save($post_id)
     {
         $save = $this->save_model->getSavedPost($_SESSION['user_id'], $post_id);
