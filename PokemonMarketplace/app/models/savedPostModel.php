@@ -17,7 +17,7 @@
 
         public function getUserSavedPosts($user_id){
             $this->db->query('SELECT s.post_id,  
-                                p.post_title, p.post_description, p.price, p.created_at as post_creation, 
+                                p.post_title, p.post_description, p.post_price, p.created_at as post_creation, 
                                 c.card_name, c.card_rarity, c.card_image, p.user_id, u.username 
                                 FROM saves as s 
                                 JOIN posts as p ON s.post_id = p.post_id 

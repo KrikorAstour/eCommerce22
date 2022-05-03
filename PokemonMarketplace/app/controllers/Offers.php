@@ -6,6 +6,7 @@ class Offers extends Controller
     {
         $this->offer_model = $this->model('OfferModel');
         $this->user_model = $this->model('Users');
+        $this->post_model = $this->model('PostModel');
     }
 
     public function index()
@@ -36,13 +37,28 @@ class Offers extends Controller
         }
     }
 
-    public function delete_offer($offer_id)
+    public function delete_offer($offer_id, $post_id)
     {
+        if (empty($_SESSION)) {
+            header('Location: ' . URLROOT);
+        } else {
+            $this->offer_model->delete(['offer_id' => $offer_id]);
+            header('Location: ' . URLROOT . '#post_num_' . $post_id);
+        }
     }
 
     public function accept($offer_id)
     {
+        if (empty($_SESSION)) {
+            header('Location: ' . URLROOT);
+        } else {
+            $int_offer_id = intval($offer_id);
+            $offer = $this->offer_model->get_single_offer(['offer_id' => $int_offer_id]);
+            $this->user_model->purchase($offer->user_id, $offer->offer_price);
+            $this->post_model->deletePost($offer->post_id);
 
+            header('Location: ' . URLROOT);
+        }
     }
 
     private function validate_offer_price($offer_price)

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 07, 2022 at 05:34 AM
--- Server version: 10.4.18-MariaDB
--- PHP Version: 8.0.3
+-- Generation Time: Apr 30, 2022 at 09:05 PM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 8.0.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -32,17 +32,9 @@ CREATE TABLE `cards` (
   `card_name` varchar(254) NOT NULL,
   `card_rarity` int(11) NOT NULL,
   `card_image` varchar(500) NOT NULL,
-  `is_offered` tinyint(1) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `cards`
---
-
-INSERT INTO `cards` (`card_id`, `card_name`, `card_rarity`, `card_image`, `is_offered`, `created_at`, `updated_at`) VALUES
-(1, 'Pikachu', 100, 'https://images.pokemontcg.io/cel25/7_hires.png', 0, '2022-04-07 02:29:39', '2022-04-07 02:29:39');
 
 -- --------------------------------------------------------
 
@@ -54,8 +46,9 @@ CREATE TABLE `comments` (
   `comment_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `post_id` int(11) NOT NULL,
+  `comment` varchar(300) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -85,19 +78,11 @@ CREATE TABLE `posts` (
   `card_id` int(11) NOT NULL,
   `post_title` varchar(254) NOT NULL,
   `post_description` varchar(1000) NOT NULL,
-  `price` double NOT NULL,
+  `post_price` double NOT NULL,
+  `isOffered` tinyint(1) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `udpated_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `posts`
---
-
-INSERT INTO `posts` (`post_id`, `user_id`, `card_id`, `post_title`, `post_description`, `price`, `created_at`, `udpated_at`) VALUES
-(1, 1, 1, 'Pikachu', 'Foo Bar Pikachu', 0, '2022-04-07 02:29:40', '2022-04-07 02:29:40'),
-(2, 2, 1, 'Pikachu', 'Foo Bar Pikachu', 0, '2022-04-07 02:29:40', '2022-04-07 02:29:40'),
-(3, 1, 1, 'Pikachu', 'Foo Bar Pikachu', 0, '2022-04-07 03:09:47', '2022-04-07 03:09:47');
 
 -- --------------------------------------------------------
 
@@ -154,13 +139,6 @@ CREATE TABLE `saves` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `saves`
---
-
-INSERT INTO `saves` (`user_id`, `post_id`, `created_at`, `updated_at`) VALUES
-(1, 1, '2022-04-07 02:41:06', '2022-04-07 02:41:09');
-
 -- --------------------------------------------------------
 
 --
@@ -171,28 +149,12 @@ CREATE TABLE `users` (
   `user_id` int(11) NOT NULL,
   `username` varchar(254) NOT NULL,
   `secret_2fa` varchar(255) NOT NULL,
-  `try_2fa` tinyint(3) unsigned DEFAULT 3,
   `password` varchar(254) NOT NULL,
+  `try_2fa` tinyint(3) UNSIGNED DEFAULT 3,
   `cash_balance` double NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`user_id`, `username`, `secret_2fa`, `try_2fa`, `password`, `cash_balance`, `created_at`, `updated_at`) VALUES
-(1, 'reimarrosas@example.com', 'XGH3DJLAAFRC77E5', 3, '$2a$10$6mDG1pAcbqmvr/kv8hU0cuuzAiURgjSR.mJGsm2B79OZlEUXaDyiu', 1000, '2022-04-07 02:29:39', '2022-04-07 02:29:39'),
-(2, 'rosasreimar@example.com', 'WO6BAVZ6HKPWN73A', 0, '$2a$10$ot8e88L7uALUypXVK26heOsPFG3O45Er/0geDuLcJLl635m2z/4ee', 0, '2022-04-07 02:29:39', '2022-04-07 02:29:39');
-
---
--- Dumping data for table `offers`
---
-
-INSERT INTO `offers` (`offer_id`, `user_id`, `post_id`, `offer_price`) VALUES
-(1, 2, 1, 4.55),
-(2, 2, 1, 6.88);
 
 --
 -- Indexes for dumped tables
@@ -272,7 +234,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `cards`
 --
 ALTER TABLE `cards`
-  MODIFY `card_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `card_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `comments`
@@ -290,7 +252,7 @@ ALTER TABLE `offers`
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `purchases`
@@ -314,7 +276,7 @@ ALTER TABLE `sales`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
@@ -324,50 +286,89 @@ ALTER TABLE `users`
 -- Constraints for table `comments`
 --
 ALTER TABLE `comments`
-  ADD CONSTRAINT `FK_POST_ID_COMMENTS` FOREIGN KEY (`post_id`) REFERENCES `posts` (`post_id`),
-  ADD CONSTRAINT `FK_USER_ID_COMMENTS` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
+  ADD CONSTRAINT `FK_POST_ID_COMMENTS` FOREIGN KEY (`post_id`) REFERENCES `posts` (`post_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_USER_ID_COMMENTS` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `offers`
 --
 ALTER TABLE `offers`
-  ADD CONSTRAINT `FK_POST_ID_OFFERS` FOREIGN KEY (`post_id`) REFERENCES `posts` (`post_id`),
-  ADD CONSTRAINT `FK_USERID_OFFERS` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
+  ADD CONSTRAINT `FK_POST_ID_OFFERS` FOREIGN KEY (`post_id`) REFERENCES `posts` (`post_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_USERID_OFFERS` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `posts`
 --
 ALTER TABLE `posts`
-  ADD CONSTRAINT `FK_CARD_ID` FOREIGN KEY (`card_id`) REFERENCES `cards` (`card_id`),
-  ADD CONSTRAINT `FK_USER_ID` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
+  ADD CONSTRAINT `FK_CARD_ID` FOREIGN KEY (`card_id`) REFERENCES `cards` (`card_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_USER_ID` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `purchases`
 --
 ALTER TABLE `purchases`
-  ADD CONSTRAINT `FK_POST_ID` FOREIGN KEY (`post_id`) REFERENCES `posts` (`post_id`);
+  ADD CONSTRAINT `FK_POST_ID` FOREIGN KEY (`post_id`) REFERENCES `posts` (`post_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `rating`
 --
 ALTER TABLE `rating`
-  ADD CONSTRAINT `FK_USERID` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
+  ADD CONSTRAINT `FK_USERID` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `sales`
 --
 ALTER TABLE `sales`
-  ADD CONSTRAINT `FK_POST_ID_SALES` FOREIGN KEY (`post_id`) REFERENCES `posts` (`post_id`),
-  ADD CONSTRAINT `FK_USER_ID_SALES` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
+  ADD CONSTRAINT `FK_POST_ID_SALES` FOREIGN KEY (`post_id`) REFERENCES `posts` (`post_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_USER_ID_SALES` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `saves`
 --
 ALTER TABLE `saves`
-  ADD CONSTRAINT `FK_POST_ID_SAVES` FOREIGN KEY (`post_id`) REFERENCES `posts` (`post_id`),
-  ADD CONSTRAINT `FK_USER_ID_SAVES` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
+  ADD CONSTRAINT `FK_POST_ID_SAVES` FOREIGN KEY (`post_id`) REFERENCES `posts` (`post_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_USER_ID_SAVES` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`user_id`, `username`, `secret_2fa`, `try_2fa`, `password`, `cash_balance`, `created_at`, `updated_at`) VALUES
+(1, 'reimarrosas@example.com', 'XGH3DJLAAFRC77E5', 3, '$2a$10$6mDG1pAcbqmvr/kv8hU0cuuzAiURgjSR.mJGsm2B79OZlEUXaDyiu', 1000, '2022-04-07 02:29:39', '2022-04-07 02:29:39'),
+(2, 'rosasreimar@example.com', 'WO6BAVZ6HKPWN73A', 0, '$2a$10$ot8e88L7uALUypXVK26heOsPFG3O45Er/0geDuLcJLl635m2z/4ee', 1200, '2022-04-07 02:29:39', '2022-04-07 02:29:39');
+
+--
+-- Dumping data for table `cards`
+--
+
+INSERT INTO `cards` (`card_id`, `card_name`, `card_rarity`, `card_image`, `created_at`, `updated_at`) VALUES
+(1, 'Pikachu', 100, 'https://images.pokemontcg.io/cel25/7_hires.png', '2022-04-07 02:29:39', '2022-04-07 02:29:39');
+
+--
+-- Dumping data for table `posts`
+--
+
+INSERT INTO `posts` (`post_id`, `user_id`, `card_id`, `post_title`, `post_description`, `post_price`, `isOffered`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 'Pikachu', 'Foo Bar Pikachu', 0, 0, '2022-04-07 02:29:40', '2022-04-07 02:29:40'),
+(2, 2, 1, 'Pikachu', 'Foo Bar Pikachu', 0, 0, '2022-04-07 02:29:40', '2022-04-07 02:29:40'),
+(3, 1, 1, 'Pikachu', 'Foo Bar Pikachu', 0, 0, '2022-04-07 03:09:47', '2022-04-07 03:09:47');
+
+--
+-- Dumping data for table `saves`
+--
+
+INSERT INTO `saves` (`user_id`, `post_id`, `created_at`, `updated_at`) VALUES
+(1, 1, '2022-04-07 02:41:06', '2022-04-07 02:41:09');
+
+--
+-- Dumping data for table `offers`
+--
+
+INSERT INTO `offers` (`offer_id`, `user_id`, `post_id`, `offer_price`) VALUES
+(1, 2, 1, 4.55),
+(2, 2, 1, 6.88);
