@@ -14,7 +14,7 @@
           <a class="nav-link active" href="<?= URLROOT ?>/saves">Saves</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="<?= URLROOT ?>/transactions">Transactisons</a>
+          <a class="nav-link active" href="<?= URLROOT ?>/transactions">Transactions</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active" href="<?= URLROOT ?>/deposit">Deposit</a>
