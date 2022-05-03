@@ -82,14 +82,15 @@ class Posts extends Controller
                 'post_title' => $_POST['post_title'],
                 'post_text' => $_POST['post_text'],
                 'post_price' => $_POST['post_price'],
+                'isoffered' => ''
                 
             ];
 
-            if(isset($_POST['is_offered'])){
-                $data['is_offered'] = '1';
+            if(isset($_POST['isoffered'])){
+                $data['isoffered'] = 1;
             }
             else{
-                $data['is_offered'] = '0';
+                $data['isoffered'] = 0;
             }
             if($this->post_model->updatePost($data, $post_Id)){
                     echo 'Updating your post!';

@@ -4,8 +4,9 @@
 <div class="wrapper">
     <div class="form-group">
         <div class="update-form">
-            <form action="" method="POST">
+            <form action="" method="POST" style="margin: auto; width: 590px;">
                 <h1>Update Post</h1>
+                <br>
                 <input type="text" class="update-form<?php echo (!empty($data['post_title_error'])) ? '-error' : ''; ?>" placeholder="post Title" name="post_title" value="<?php echo (!empty($data['post']->post_title)) ? $data['post']->post_title : ''; ?>">
                 <p class="update-form-error"><?php echo (!empty($data['post_title_error'])) ? $data['post_title_error'] : ''; ?></p>
                 
@@ -14,8 +15,12 @@
                 
                 <input type="text" class="update-form<?php echo (!empty($data['post_price_error'])) ? '-error' : ''; ?>" placeholder="post Price" name="post_price" value="<?php echo (!empty($data['post']->post_price)) ? $data['post']->post_price : ''; ?>">
                 <p class="update-form-error"><?php echo (!empty($data['post_title_error'])) ? $data['post_title_error'] : ''; ?></p>
-                
-                <button class="button-primary" type="submit" name="confirm">Confirm</button>
+                <label>
+                    <input type="checkbox" name="isoffered">Is it offered?
+                </label>
+                <br>
+                <br>
+                <button class="btn btn-success" type="submit" name="confirm">Confirm</button>
             </form>
         </div>
     </div>

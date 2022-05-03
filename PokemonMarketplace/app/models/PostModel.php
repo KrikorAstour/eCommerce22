@@ -50,11 +50,11 @@ class PostModel extends Model
     }
     
     public function updatePost($data, $post_id){
-        $this->query('UPDATE posts SET post_title=:post_title, post_description=:post_description post_price=:post_price Where post_id=:post_id');
+        $this->query('UPDATE posts SET post_title=:post_title, post_description=:post_description post_price=:post_price isOffered=:isoffered Where post_id=:post_id');
         $this->bind('post_title', $data['post_title']);
         $this->bind('post_description', $data['post_text']);
         $this->bind('post_price', $data['post_price']);
-
+        $this-.bind('isoffered', $data['isoffered']);
         $this->bind('post_id', $post_id);
         
         return $this->execute();
