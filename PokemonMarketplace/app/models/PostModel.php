@@ -9,8 +9,8 @@ class PostModel extends Model
     }
 
     public function createPost($data, $user_id, $card_id){
-        $this->query('INSERT INTO posts (user_id, card_id, post_title, post_description, post_price) 
-                        VALUES (:user_id, :card_id, :post_title, :post_description, :post_price)'
+        $this->query('INSERT INTO posts (user_id, card_id, post_title, post_description, post_price, isOffered) 
+                        VALUES (:user_id, :card_id, :post_title, :post_description, :post_price, :isOffered)'
                     );
                          
         $this->bind('user_id', $user_id);
@@ -18,6 +18,7 @@ class PostModel extends Model
         $this->bind('post_title', $data['post_title']);
         $this->bind('post_description', $data['post_description']);
         $this->bind('post_price', $data['post_price']);
+        $this->bind('isOffered', $data['isoffered']);
         
             
         return $this->execute();

@@ -6,9 +6,11 @@
     <h1>Create Your Card!</h1>
   </div>
 </div>
+<br>
+<br>
 
 <div class="update-form">
-    <form action="" method="POST">
+    <form action="" method="POST" style="margin: auto; width: 590px;">
       
 
         <input type="text" class="update-form<?php echo (!empty($data['card_name_error'])) ? '-error' : ''; ?>
@@ -35,11 +37,13 @@
         
         <input tjype="text" class="update-form<?php echo (!empty($data['post_price_error'])) ? '-error' : ''; ?>
         " placeholder="Post Price" name="post_price"> <br>
-        
-
-    
         <br>
-        <button class="btn btn-success" type="submit" name="next">Next</button>
+        <label>
+             <input type="checkbox" name="isoffered">Is it offered?
+        </label>
+    <br>
+        <br>
+        <button class="btn btn-success" type="submit" name="next">Upload</button>
     </form>
     
 </div>

@@ -30,8 +30,15 @@ class Posts extends Controller
                     'card_image' => $_POST['card_image'],
                     'post_title' => $_POST['post_title'],
                     'post_price' => $_POST['post_price'],
-                    'post_description' => $_POST['post_description']
+                    'post_description' => $_POST['post_description'],
+                    'isoffered' => ''
                 ];
+                if(isset($_POST['isoffered'])){
+                    $data['isoffered'] = 1;
+                }else{
+                    $data['isoffered'] = 0;
+                }
+
                 $isSucc = $this->post_model->createCard($data);
                 $card_id = $this->post_model->getCardId($data['card_image']);
                 
