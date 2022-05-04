@@ -7,6 +7,7 @@ class Posts extends Controller
         $this->post_model = $this->model('PostModel');
         $this->save_model = $this->model('savedPostModel');
         $this->comment_model = $this->model("commentModel");
+        $this->rating_model = $this->model("ratingModel");
     }
 
     public function index()
@@ -167,6 +168,33 @@ class Posts extends Controller
                 }
             }
 
+            
+        }
+    }
+
+    public function giveRating($user_id,$rated_by){
+        if (empty($_SESSION)) {
+            header('Location: ' . URLROOT . '/login');
+        } else {
+
+            if($_POST['rating']!="0"){
+                if ($_SESSION['user_id'] != $user_id){
+                    $rating = $this->rating_model->getOneUserRating($user_id,$rated_by);
+    
+                    if($rating==null){
+                        if($this->rating_model->giveRating($user_id,$rated_by,$_POST['rating'])){
+                            header('Location: ' . $_SERVER['HTTP_REFERER']);
+                        }
+                    }
+                    else{
+                        if($this->rating_model->updateRating($rating->rating_id,$_POST['rating'])){
+                            header('Location: ' . $_SERVER['HTTP_REFERER']);
+                        }
+                    }
+                }
+            }
+
+            
             
         }
     }

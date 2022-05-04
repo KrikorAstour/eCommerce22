@@ -11,6 +11,20 @@
       <article class="card mb-4 mx-auto post" id="post_num_<?= $post->post_id ?>">
         <header class="card-header bg-danger text-white d-flex justify-content-between align-items-center">
           <h2 class="fs-4"><?= extract_username_from_email($post->username); ?></h2>
+          <div class="d-flex flex-row align-items-left">
+          <?php if (!$post->is_mine) : ?>
+              <form action="<?= URLROOT ?>/posts/giveRating/<?= $post->user_id ?>/<?= $_SESSION['user_id'] ?>" method="POST">
+                <fieldset class="rating">
+                  <input type="radio" id="star5" name="rating" value="5" /><label class="bi bi-star-fill" for="star5" title="5 stars"></label>
+                  <input type="radio" id="star4" name="rating" value="4" /><label class="bi bi-star-fill" for="star4" title="4 stars"></label>
+                  <input type="radio" id="star3" name="rating" value="3" /><label class="bi bi-star-fill" for="star3" title="3 stars"></label>
+                  <input type="radio" id="star2" name="rating" value="2" /><label class="bi bi-star-fill" for="star2" title="2 stars"></label>
+                  <input type="radio" id="star1" name="rating" value="1" /><label class="bi bi-star-fill" for="star1" title="1 star"></label>
+                </fieldset>
+                <input type="submit" name="rate" value="Give Rating!" class="btn btn-info ">
+              </form>
+          <?php endif; ?>
+</div>
           <a class="<?= $post->is_saved_by_me ? 'fa-solid' : 'fa-regular' ?> fa-bookmark link-light fs-4" href="<?= URLROOT ?>/posts/save_from_home/<?= $post->post_id ?>"></a>
         </header>
         <main class="row g-0">

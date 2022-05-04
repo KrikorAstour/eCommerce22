@@ -53,7 +53,7 @@
         }
 
         public function deleteSavedPost($user_id,$post_id){
-            $this->db->query("DELETE FROM Saves WHERE user_id = :user_id AND post_id = :post_id");
+            $this->db->query("DELETE FROM saves WHERE user_id = :user_id AND post_id = :post_id");
             $this->db->bind(":user_id",$user_id);
             $this->db->bind(":post_id",$post_id);
 
