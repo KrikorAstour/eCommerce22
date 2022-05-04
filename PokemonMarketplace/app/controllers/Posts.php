@@ -139,7 +139,7 @@ class Posts extends Controller
         } else {
 
             if(!isset($_POST['comment'])){
-                header('Location: ' . URLROOT ); 
+                header('Location: ' . $_SERVER['HTTP_REFERER']);
             }
             else{
                 $data = [
@@ -147,16 +147,27 @@ class Posts extends Controller
                 ];
 
                 if($this->comment_model->createComment($post_id,$_SESSION['user_id'],$data['comment'])){
-                    header('Location: ' . URLROOT);
+                    header('Location: ' . $_SERVER['HTTP_REFERER']);
                 }
-                else{
-                    header('Location: ' . URLROOT . '/profile'); 
-
-                }
+                
             }
             
-            
+        }
+    }
 
+
+    public function deleteComment($user_id,$comment_id){
+        if (empty($_SESSION)) {
+            header('Location: ' . URLROOT . '/login');
+        } else {
+
+            if ($_SESSION['user_id'] == $user_id){
+                if($this->comment_model->deleteComment($comment_id)){
+                    header('Location: ' . $_SERVER['HTTP_REFERER']);
+                }
+            }
+
+            
         }
     }
 }

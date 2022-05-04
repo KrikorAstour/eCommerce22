@@ -23,11 +23,12 @@
                                                     <br>
                                                     <input type="submit" class="btn btn-info float-end" name="comment" value="Add Comment"></button>
                                                     <div class="clearfix"></div>
-
+                                                    
                                                 </form>
                                                 <hr>
                                                 <ul class="media-list">
-                                                    <?php foreach ($data['comments'] as $comment) : ?>
+                                                    <?php if(!empty($data['comments'])) : ?>
+                                                        <?php foreach ($data['comments'] as $comment) : ?>
                                                         <?php if ($post->post_id == $comment->post_id) : ?>
                                                             <li class="media">
                                                                 <div class="media-body">
@@ -35,14 +36,18 @@
                                                                     <span class="text-muted ">
                                                                         <small class="text-muted"><?= $comment->updated_at ?></small>
                                                                     </span>
-
+                                                                    <?php if ($_SESSION['user_id'] == $comment->user_id) : ?>
+                                                                        <a style="color: red;" class="fa-solid fa-trash link-light fs-6" href="<?= URLROOT ?>/posts/deleteComment/<?=$comment->user_id?>/<?= $comment->comment_id ?>"></a>
+                                                                    <?php endif; ?>
                                                                     <p>
                                                                         <?= $comment->comment ?>
                                                                     </p>
+                                                                    
                                                                 </div>
                                                             </li>
                                                         <?php endif; ?>
-                                                    <?php endforeach; ?>
+                                                        <?php endforeach; ?>
+                                                    <?php endif;?>
 
                                                 </ul>
                                             </div>

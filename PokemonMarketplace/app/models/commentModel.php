@@ -6,7 +6,7 @@
         }
         
         public function getAllComments(){
-            $this->query("SELECT c.comment, c.updated_at,
+            $this->query("SELECT c.comment_id, c.comment, c.updated_at,
                                  u.username, u.user_id, p.post_id
                           FROM comments AS c
                           JOIN users AS u ON c.user_id = u.user_id 
@@ -62,12 +62,11 @@
             }
         }
 
-        public function deleteComment($post_id,$user_id){
+        public function deleteComment($comment_id){
             $this->query("DELETE FROM comments 
-                          WHERE post_id = :post_id AND user_id = :user_id");
+                          WHERE comment_id = :comment_id ");
 
-            $this->bind(":post_id",$post_id);
-            $this->bind(":user_id",$user_id);
+            $this->bind(":comment_id",$comment_id);
             
             if($this->execute()){
                 return true;

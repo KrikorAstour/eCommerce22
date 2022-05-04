@@ -25,7 +25,7 @@
               </div>
               <div class="d-flex justify-content-between align-items-center">
                 <h3 class="fs-4 fw-bold">
-                  Price: <?= $post->price ? '$' . $post->price : 'N/A' ?>
+                  Price: <?= $post->post_price ? '$' . $post->post_price : 'N/A' ?>
                 </h3>
                 <div>
                   <?php if ($post->is_mine) : ?>

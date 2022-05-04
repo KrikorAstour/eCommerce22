@@ -54,7 +54,7 @@ class PostModel extends Model
         $this->bind('post_title', $data['post_title']);
         $this->bind('post_description', $data['post_text']);
         $this->bind('post_price', $data['post_price']);
-        $this-.bind('isoffered', $data['isoffered']);
+        $this->bind('isoffered', $data['isoffered']);
         $this->bind('post_id', $post_id);
         
         return $this->execute();
