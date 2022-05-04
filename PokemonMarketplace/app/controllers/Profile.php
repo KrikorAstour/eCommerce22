@@ -9,6 +9,7 @@ class Profile extends Controller
         $this->save_model = $this->model('savedPostModel');
         $this->offer_model = $this->model('OfferModel');
         $this->comment_model = $this->model("commentModel");
+        $this->rating_model = $this->model("ratingModel");
     }
 
     public function index($user_id)
@@ -45,13 +46,15 @@ class Profile extends Controller
             $posts = $this->post_model->get_user_posts($_SESSION['user_id']);
             $posts_with_saves = map_posts_to_users($posts, $this->save_model, $this->offer_model);
             $comments = $this->comment_model->getAllComments();
+            $rating = $this->rating_model->getUserRatingAvg($_SESSION['user_id']);
 
             $data = [
                 'posts' => $posts_with_saves,
                 'username' => extract_username_from_email($_SESSION['username']),
                 'user_id' => $_SESSION['user_id'],
                 'is_mine' => true,
-                'comments' => $comments
+                'comments' => $comments,
+                'ratings'=>  $rating
             ];
 
             $this->view('Profile/profile', $data);

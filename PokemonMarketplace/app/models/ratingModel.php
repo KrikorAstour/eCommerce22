@@ -17,7 +17,7 @@
         }
 
         public function getUserRatingAvg($user_id){
-            $this->query('SELECT AVG(rating_num) 
+            $this->query('SELECT AVG(rating_num) as rating
                         FROM rating 
                         WHERE user_id = :user_id ');
 

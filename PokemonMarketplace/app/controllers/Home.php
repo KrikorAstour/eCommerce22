@@ -8,6 +8,7 @@ class Home extends Controller
         $this->save_model = $this->model('savedPostModel');
         $this->offer_model = $this->model('OfferModel');
         $this->comment_model = $this->model('commentModel');
+        $this->rating_model = $this->model("ratingModel");
     }
 
     public function index()
@@ -18,7 +19,8 @@ class Home extends Controller
             $posts = $this->post_model->get_all_posts();
             $posts_with_saves = map_posts_to_users($posts, $this->save_model, $this->offer_model);
             $comments = $this->comment_model->getAllComments();
-
+            
+            
 
             $data = [
                 'posts' => $posts_with_saves,
@@ -30,5 +32,7 @@ class Home extends Controller
         }
     }
 
+
+    
     
 }
