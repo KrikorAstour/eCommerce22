@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 30, 2022 at 09:05 PM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 8.0.13
+-- Generation Time: May 04, 2022 at 05:44 PM
+-- Server version: 10.4.18-MariaDB
+-- PHP Version: 8.0.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -107,6 +107,7 @@ CREATE TABLE `purchases` (
 CREATE TABLE `rating` (
   `rating_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
+  `rated_by` int(11) NOT NULL,
   `rating_num` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `update_at` timestamp NOT NULL DEFAULT current_timestamp()
