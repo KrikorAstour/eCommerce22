@@ -47,4 +47,10 @@ class OfferModel extends Model
         $this->bind('offer_id', $data['offer_id']);
         return $this->getSingle();
     }
+
+    public function delete_all_post_offers($post_id) {
+        $this->query('DELETE FROM offers WHERE post_id = :post_id');
+        $this->bind('post_id', $post_id);
+        return $this->execute();
+    }
 }

@@ -7,6 +7,7 @@ class Offers extends Controller
         $this->offer_model = $this->model('OfferModel');
         $this->user_model = $this->model('Users');
         $this->post_model = $this->model('PostModel');
+        $this->transaction_model = $this->model('TransactionModel');
     }
 
     public function index()
@@ -54,8 +55,25 @@ class Offers extends Controller
         } else {
             $int_offer_id = intval($offer_id);
             $offer = $this->offer_model->get_single_offer(['offer_id' => $int_offer_id]);
-            $this->user_model->purchase($offer->user_id, $offer->offer_price);
-            $this->post_model->deletePost($offer->post_id);
+            $post = $this->post_model->get_post_user($offer->post_id);
+
+            $isSuccPurchase = $this->user_model->purchase($offer->user_id, $offer->offer_price);
+            if ($isSuccPurchase) {
+                $isSuccToggle = $this->post_model->toggle_is_offered($offer->post_id, false);
+                if ($isSuccToggle) {
+                    $data = [
+                        'buyer_id' => $offer->user_id,
+                        'seller_id' => $post->user_id,
+                        'price' => doubleval($offer->offer_price),
+                        'post_id' => $offer->post_id
+                    ];
+                    $isSuccOffer = $this->transaction_model->accept_offer($data);
+
+                    if ($isSuccOffer) {
+                        $isSucc = $this->offer_model->delete_all_post_offers($offer->post_id);
+                    }
+                }
+            }
 
             header('Location: ' . URLROOT);
         }

@@ -89,4 +89,19 @@ class PostModel extends Model
         );
         return $this->getResultSet();
     }
+
+    public function toggle_is_offered($post_id, $is_offered)
+    {
+        $this->query('UPDATE posts SET isOffered = :is_offered WHERE post_id = :post_id');
+        $this->bind('post_id', $post_id);
+        $this->bind('is_offered', $is_offered);
+        return $this->execute();
+    }
+
+    public function get_post_user($post_id)
+    {
+        $this->query('SELECT user_id FROM posts WHERE post_id = :post_id');
+        $this->bind('post_id', $post_id);
+        return $this->getSingle();
+    }
 }

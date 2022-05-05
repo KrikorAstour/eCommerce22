@@ -73,4 +73,20 @@ class Model
         $this->execute();
         return $this->stmt->fetch(PDO::FETCH_OBJ);
     }
+
+    public function start_transaction()
+    {
+        $this->dbh->beginTransaction();
+    }
+
+    public function end_transaction($is_succ)
+    {
+        if ($is_succ) {
+            $this->dbh->commit();
+        } else {
+            $this->dbh->rollBack();
+        }
+
+        return $is_succ;
+    }
 }
