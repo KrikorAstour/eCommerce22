@@ -25,7 +25,7 @@ class Home extends Controller
             $data = [
                 'posts' => $posts_with_saves,
                 'comments' => $comments,
-                'login_id' => $_SESSION['user_id']
+                'user_id' => $_SESSION['user_id']
             ];
 
             $this->view('Home/home', $data);

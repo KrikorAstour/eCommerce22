@@ -32,17 +32,18 @@ class Login extends Controller
                     $data['error'] = ['Email Invalid'];
                 } else  if (!password_verify($result['password'], $user->password)) {
                     $data['error'] = ['Password Invalid'];
-                } else if (is_bool($result['two_fa']) && $result['two_fa']) {
-                    if ($user->try_2fa == 0) {
-                        $data['error'] = ['No more tries!'];
-                    } else {
-                        $this->user_model->reduce_2fa_tries($user->user_id);
-                        $generated_qr = \Sonata\GoogleAuthenticator\GoogleQrUrl::generate($result['email'], $user->secret_2fa, 'Pokemon Marketplace');
-                        return $this->view('Login/qrcode_retry', ['qr_link' => $generated_qr, 'try_num' => $user->try_2fa - 1]);
-                    }
-                } else if (!$this->ga->checkCode($user->secret_2fa, $result['two_fa'])) {
-                    $data['error'] = ['2FA Token Invalid'];
-                } else {
+                } // else if (is_bool($result['two_fa']) && $result['two_fa']) {
+                //     if ($user->try_2fa == 0) {
+                //         $data['error'] = ['No more tries!'];
+                //     } else {
+                //         $this->user_model->reduce_2fa_tries($user->user_id);
+                //         $generated_qr = \Sonata\GoogleAuthenticator\GoogleQrUrl::generate($result['email'], $user->secret_2fa, 'Pokemon Marketplace');
+                //         return $this->view('Login/qrcode_retry', ['qr_link' => $generated_qr, 'try_num' => $user->try_2fa - 1]);
+                //     }
+                // } else if (!$this->ga->checkCode($user->secret_2fa, $result['two_fa'])) {
+                //     $data['error'] = ['2FA Token Invalid'];
+                // }
+                else {
                     $_SESSION['user_id'] = $user->user_id;
                     $_SESSION['username'] = $user->username;
                     return header('Location: ' . URLROOT);

@@ -23,31 +23,31 @@
                                                     <br>
                                                     <input type="submit" class="btn btn-info float-end" name="comment" value="Add Comment"></button>
                                                     <div class="clearfix"></div>
-                                                    
+
                                                 </form>
                                                 <hr>
                                                 <ul class="media-list">
-                                                    <?php if(!empty($data['comments'])) : ?>
+                                                    <?php if (!empty($data['comments'])) : ?>
                                                         <?php foreach ($data['comments'] as $comment) : ?>
-                                                        <?php if ($post->post_id == $comment->post_id) : ?>
-                                                            <li class="media">
-                                                                <div class="media-body">
-                                                                    <strong class="text-success"><?= extract_username_from_email($comment->username); ?></strong>
-                                                                    <span class="text-muted ">
-                                                                        <small class="text-muted"><?= $comment->updated_at ?></small>
-                                                                    </span>
-                                                                    <?php if ($_SESSION['user_id'] == $comment->user_id) : ?>
-                                                                        <a style="color: red;" class="fa-solid fa-trash link-light fs-6" href="<?= URLROOT ?>/posts/deleteComment/<?=$comment->user_id?>/<?= $comment->comment_id ?>"></a>
-                                                                    <?php endif; ?>
-                                                                    <p>
-                                                                        <?= $comment->comment ?>
-                                                                    </p>
-                                                                    
-                                                                </div>
-                                                            </li>
-                                                        <?php endif; ?>
+                                                            <?php if ($post->post_id == $comment->post_id) : ?>
+                                                                <li class="media">
+                                                                    <div class="media-body">
+                                                                        <strong class="text-success"><?= extract_username_from_email($comment->username); ?></strong>
+                                                                        <span class="text-muted ">
+                                                                            <small class="text-muted"><?= $comment->updated_at ?></small>
+                                                                        </span>
+                                                                        <?php if ($_SESSION['user_id'] == $comment->user_id) : ?>
+                                                                            <a style="color: red;" class="fa-solid fa-trash link-light fs-6" href="<?= URLROOT ?>/posts/deleteComment/<?= $comment->user_id ?>/<?= $comment->comment_id ?>"></a>
+                                                                        <?php endif; ?>
+                                                                        <p>
+                                                                            <?= $comment->comment ?>
+                                                                        </p>
+
+                                                                    </div>
+                                                                </li>
+                                                            <?php endif; ?>
                                                         <?php endforeach; ?>
-                                                    <?php endif;?>
+                                                    <?php endif; ?>
 
                                                 </ul>
                                             </div>
@@ -57,12 +57,6 @@
                                 </div>
                             </div>
                         </div>
-
-
-
-
-
-
                     </div>
                     <div class="tab-pane fade" id="offer<?= $post->post_id ?>" role="tabpanel" aria-labelledby="offer-tab<?= $post->post_id ?>">
                         <ul class="list-group pt-2">
@@ -71,7 +65,7 @@
                                 <li class="list-item d-flex justify-content-between align-items-center">
                                     <?php if ($post->is_mine) : ?>
                                         <a href="<?= URLROOT . '/offers/accept/' . $offer->offer_id ?>" class="list-group-item list-group-item-action d-flex flex-column" id="offers<?= $offer->offer_id ?>">
-                                        <?php elseif ($offer->user_id == $data['login_id']) : ?>
+                                        <?php elseif ($offer->user_id == $data['user_id']) : ?>
                                             <a href="<?= URLROOT . '/offers/delete_offer/' . $offer->offer_id . '/' . $offer->post_id ?>" class="list-group-item list-group-item-action d-flex flex-column" id="offers<?= $offer->offer_id ?>">
                                             <?php else : ?>
                                                 <a href="#" class="list-group-item list-group-item-action disabled d-flex flex-column" id="offers<?= $offer->offer_id ?>">
@@ -89,7 +83,7 @@
                                 </li>
                             <?php endforeach; ?>
                         </ul>
-                        <?php if ($post->user_id != $data['login_id'] && $post->isOffered) : ?>
+                        <?php if ($post->user_id != $_SESSION['user_id']  && $post->isOffered) : ?>
                             <form action="<?= URLROOT ?>/offers/create_offer" method="post" class="p-2">
                                 <input type="hidden" name="redirection_link" value="/">
                                 <input type="hidden" name="post_num" value="<?= $post->post_id ?>">
