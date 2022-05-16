@@ -24,13 +24,15 @@ class Profile extends Controller
                 $posts = $this->post_model->get_user_posts($user_id);
                 $posts_with_saves = map_posts_to_users($posts, $this->save_model, $this->offer_model);
                 $comments = $this->comment_model->getAllComments();
+                $rating = $this->rating_model->getUserRatingAvg($user_id);
 
                 $data = [
                     'posts' => $posts_with_saves,
                     'username' => extract_username_from_email($user->username),
                     'user_id' => $user->user_id,
                     'is_mine' => $_SESSION['user_id'] == $user_id,
-                    'comments' => $comments
+                    'comments' => $comments,
+                    'ratings'=>  $rating
                 ];
 
                 $this->view('Profile/profile', $data);
